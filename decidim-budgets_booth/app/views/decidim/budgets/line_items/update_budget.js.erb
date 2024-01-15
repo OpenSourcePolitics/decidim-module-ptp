@@ -21,12 +21,6 @@ if ($projectModal.length > 0) {
   morphdom($projectModalButtonForm[0], '<%= j(cell("decidim/budgets/project_vote_button", project, scale_up: true)).strip.html_safe %>');
 }
 
-if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
-  $(".project-vote-button", $projectModal).focus();
-} else {
-  $(".project-vote-button", $projectItem).focus();
-}
-
 <% if @show_help_modal %>
   $("#voting-help").foundation("open");
 <% end %>
