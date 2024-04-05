@@ -53,7 +53,7 @@ fr:
         budget_confirm:
           is_this_correct: Is this correct?
         budget_summary:
-          back_to_budgets: Show all budgets
+          back_to_budgets: Afficher tous les budgets
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
           choose_description: Choisissez les projets que vous aimez et votez à la fin.
@@ -65,6 +65,9 @@ fr:
           title: Êtes-vous certain de vouloir annuler votre vote ?
         index:
           back_to_budgets: Retour aux budgets
+          budget_title: Vous votez sur le bulletin de vote intitulé %{budget_title_h2}.
+          budget_description_before : Il y a
+          budget_description_after : au total, choisissez les projets qui vous plaisent et votez à la fin.
         order_progress:
           ready: I am ready
           total_budget: 'Budget total: '
