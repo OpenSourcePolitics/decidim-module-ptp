@@ -53,6 +53,9 @@ en:
       projects:
         budget_confirm:
           is_this_correct: Is this correct?
+        budget_backButton:
+          back_to_budgets: Show all budgets
+          cancel_voting: Cancel voting
         budget_summary:
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
@@ -68,6 +71,9 @@ en:
           title: Are you sure you don't want to cast your vote?
         index:
           back_to_budgets: Back to budgets
+          budget_title: You're voting on the %{budget_title_h2} ballot
+          budget_description_before: There are
+          budget_description_after: in total, choose the projects you like and cast your vote at the end.
         order_progress:
           ready: I am ready
           total_budget: 'Total budget: '
