@@ -29,6 +29,8 @@
     <div>
       <%= resource_text %>
     </div>
+    <%= cell("decidim/budgets/project_tags", model, context: { extra_classes: [" tags--project"] } ) %>
+
     <% if !show_full_description? %>
       <% if voting_mode? %>
         <button class="link" data-open="project-modal-<%= model.id %>">
@@ -38,5 +40,6 @@
         <%= link_to t("read_more", scope: "decidim.budgets.project_list_item"), resource_path, class: "link" %>
       <% end %>
     <% end %>
+
   </div>
 </div>
