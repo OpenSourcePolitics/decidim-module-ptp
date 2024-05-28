@@ -62,7 +62,7 @@ fr:
           description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
           exit: Je ne veux pas voter pour le moment
           label: Quitter le vote
-          title: Êtes-vous certain de vouloir annuler votre vote ?
+          title: Êtes-vous certain de vouloir annuler votre vote ?
         index:
           back_to_budgets: Retour aux budgets
         order_progress:
@@ -101,11 +101,9 @@ fr:
           unknown: Il y a eu une erreur. Veuillez réessayer.
           zip_code_empty: Le format du code postal n'est pas correct.
           zip_code_included: Le code postal que vous avez fourni ne fait pas partie des zones éligibles pour le vote. Assurez-vous d'avoir entré le bon code postal et réessayez.
-  new:
         new:
           affirm_statements: En cochant cette case, j'affirme que ces déclarations sont vraies et que je remplis les conditions d'éligibilité au vote.
-    cancel: Annuler
-          cancel: Cancel
+          cancel: Annuler
           change_zip_code_after_vote: Vous ne pouvez pas changer votre code postal après avoir commencé à voter. Supprimez d'abord tous vos votes.
           description: Veuillez fournir votre code postal pour trouver vos bulletins de budget participatif.
           inputs:
