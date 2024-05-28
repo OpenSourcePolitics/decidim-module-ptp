@@ -144,7 +144,7 @@ fr:
             vote_cancel_url: URL de redirection de l'utilisateur lors de l'annulation du vote (par défaut vers la racine)
             vote_completed_content: Texte de la modale après avoir voté pour tous les budgets disponibles
             vote_success_content: Modale après chaque vote
-            vote_success_url:URL de redirection de l'utilisateur après avoir voté pour tous les budgets disponibles (par défaut vers la liste des budgets)
+            vote_success_url: URL de redirection de l'utilisateur après avoir voté pour tous les budgets disponibles (par défaut vers la liste des budgets)
             voting_terms: Termes et conditions à afficher lorsque l'utilisateur veut entrer son code postal
             workflow_choices:
               zip_code: 'Vote basé sur le code postal : permet aux participants de voter sur les budgets correspondant à leur code postal saisi.'
