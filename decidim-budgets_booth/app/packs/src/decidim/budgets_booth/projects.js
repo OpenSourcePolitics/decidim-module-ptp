@@ -15,16 +15,13 @@ const initializeProjects = () => {
   $voteButton.on("click", "span", () => {
     $(".budget-list__action").click();
   });
-  
+
   $projects.on("click", ".customized-budget", (event) => {
     const currentAllocation = parseInt($budgetSummary.attr("data-current-allocation"), 10);
     const $currentTarget = $(event.currentTarget);
     const projectAllocation = parseInt($currentTarget.attr("data-allocation"), 10);
 
-    if (!$currentTarget.attr("data-open")) {
-      $currentTarget.addClass("loading-spinner");
-    }
-    
+
     let $targetCategory = null;
     const $targetCategoryId = $currentTarget.parents(".budget-list__data").first().data("categoryId");
     if ($targetCategoryId !== undefined) {
