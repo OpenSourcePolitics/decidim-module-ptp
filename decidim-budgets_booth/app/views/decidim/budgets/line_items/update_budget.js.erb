@@ -17,6 +17,7 @@ if ($projectItem.length > 0) {
 }
 
 if ($projectModal.length > 0) {
+  $projectModal.foundation("close"); // Close the modal when button has been clicked
   var $projectModalButtonForm = $(".project-vote-button", $projectModal).parent();
   morphdom($projectModalButtonForm[0], '<%= j(cell("decidim/budgets/project_vote_button", project, scale_up: true)).strip.html_safe %>');
 }
