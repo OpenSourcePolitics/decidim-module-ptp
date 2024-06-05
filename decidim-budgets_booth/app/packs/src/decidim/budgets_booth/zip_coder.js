@@ -1,5 +1,5 @@
 $(() => {
-  const zipcodeInputs = document.querySelectorAll('#zip-code input[type="text"]');
+  const zipcodeInputs = document.querySelectorAll('#zip-code input[type="number"]');
   const zipCodeNotValid = document.querySelector("#zip-code-not-valid");
   const zipCodeError = document.querySelector("#zip-code-error");
   const onlyLettersAllowed = document.querySelector("#only-letters-allowed");
