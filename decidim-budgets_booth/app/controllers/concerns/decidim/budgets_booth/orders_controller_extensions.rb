@@ -69,7 +69,6 @@ module Decidim
               budget_name: order.budget.title
             }
           )
-          Rails.logger.debug 'Notification sent for order #{order.id}'
         end
       end
     end
