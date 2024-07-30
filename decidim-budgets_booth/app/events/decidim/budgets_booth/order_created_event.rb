@@ -7,13 +7,12 @@ module Decidim
 
       def notification_title
         I18n.t(
-          'decidim.budgets_booth.order_created_event.notification_title',
-        order_id: resource.id
+          'decidim.budgets.voting.voting_notification_event.notification_title',
         )
       end
 
       def notification_body
-        I18n.t('decidim.budgets_booth.order_created_event.notification_body',
+        I18n.t('decidim.budgets.voting.voting_notification_event.notification_body',
                user_name: resource.user.name,
                budget_name: resource.budget.title
         )

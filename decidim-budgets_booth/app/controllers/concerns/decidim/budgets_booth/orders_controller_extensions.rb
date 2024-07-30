@@ -65,7 +65,6 @@ module Decidim
             resource: order,
             affected_users: [order.user],
             extra: {
-              order_id: order.id,
               budget_name: order.budget.title
             }
           )

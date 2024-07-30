@@ -145,6 +145,9 @@ en:
           label: Close
           list_description: These are the projects you picked.
           title: Your vote
+        voting_notification_event:
+          notification_title: You have successfully cast your vote for the budget %{budget_name}.
+          notification_body: You have successfully cast your vote for the budget %{budget_name}.
     components:
       budgets:
         settings:
