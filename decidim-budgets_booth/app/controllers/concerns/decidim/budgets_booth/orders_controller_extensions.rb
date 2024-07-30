@@ -16,6 +16,7 @@ module Decidim
             on(:ok) do
               reset_workflow
               handle_user_redirect
+              send_notification
             end
 
             on(:invalid) do
@@ -55,6 +56,20 @@ module Decidim
           return unless current_order.present? && current_order.checked_out_at.present?
 
           current_order
+        end
+
+        def send_notification
+          Decidim::EventsManager.publish(
+            event: "decidim.events.budgets_booth.order_created",
+            event_class: Decidim::BudgetsBooth::OrderCreatedEvent,
+            resource: order,
+            affected_users: [order.user],
+            extra: {
+              order_id: order.id,
+              budget_name: order.budget.title
+            }
+          )
+          Rails.logger.debug 'Notification sent for order #{order.id}'
         end
       end
     end
