@@ -133,6 +133,9 @@ fi:
           label: Sulje
           list_description: Valitsit nämä hankkeet.
           title: Äänesi
+        voting_notification_event:
+          notification_casted: Äänestys on suoritettu
+          notification_title: Olet onnistuneesti äänestänyt budjetista %{budget_name}
     components:
       budgets:
         settings:
