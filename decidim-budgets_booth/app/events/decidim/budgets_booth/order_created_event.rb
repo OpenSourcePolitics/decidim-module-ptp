@@ -8,20 +8,14 @@ module Decidim
       def notification_title
         I18n.t(
           'decidim.budgets.voting.voting_notification_event.notification_title',
-        )
-      end
-
-      def notification_body
-        I18n.t('decidim.budgets.voting.voting_notification_event.notification_body',
-               user_name: resource.user.name,
-               budget_name: resource.budget.title
-        )
+          budget_name: resource_title
+          )
       end
 
       private
 
       def resource_title
-        resource.budget.title
+        translated_attribute(resource.budget.title)
       end
 
       def resource_path
