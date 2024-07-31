@@ -6,7 +6,7 @@ module Decidim
       include Decidim::Events::NotificationEvent
 
       def self.model_name
-        ActiveModel::Name.new(self, nil, I18n.t('decidim.budgets.voting.order_created_event.notification_casted'))
+        ActiveModel::Name.new(self, nil, I18n.t('decidim.budgets.voting.voting_notification_event.notification_casted'))
       end
 
       def notification_title
