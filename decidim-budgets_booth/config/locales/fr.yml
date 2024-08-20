@@ -133,6 +133,9 @@ fr:
           label: Fermer
           list_description: Voici les projets que vous avez sélectionnés.
           title: Votre vote
+        voting_notification_event:
+          notification_casted: Votre vote a été enregistré
+          notification_title: Vous avez voté avec succès pour le budget %{budget_name}
     components:
       budgets:
         settings:

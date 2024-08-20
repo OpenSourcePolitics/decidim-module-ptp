@@ -38,6 +38,12 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
         expect(response).to redirect_to(decidim_budgets.budgets_path)
         expect(session[:booth_thanks_message]).to be(true)
       end
+
+      it "enqueues job" do
+        expect do
+          post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
+        end.to have_enqueued_job(Decidim::EventPublisherJob)
+      end
     end
 
     context "when invalid" do
