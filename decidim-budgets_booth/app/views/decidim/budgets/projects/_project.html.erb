@@ -1,1 +1,3 @@
-<%= cell "decidim/budgets/project_list_item", project, voting_mode: voting_mode? %>
+<% show_only_added ||= params.dig(:filter, :addition_type) == "added" %>
+<% @view_mode = view_mode if @view_mode.nil? %>
+<%= card_for project, from: project, size: card_size_for_view_mode(@view_mode), show_only_added:, view_mode: @view_mode, render_extra_data: true %>

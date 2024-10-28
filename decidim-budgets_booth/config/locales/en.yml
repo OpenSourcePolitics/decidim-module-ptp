@@ -72,6 +72,12 @@ en:
           ready: I am ready
           total_budget: 'Total budget: '
           vote: Vote
+        order_selected_projects:
+          remove: Remove
+          selected_projects:
+            one: selected project
+            other: selected projects
+          view: See
         pre_voting_budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
           cancel_order: Cancel your vote
@@ -98,10 +104,12 @@ en:
           close_project: Close
           scope: 'Scope: '
         show:
+          budget: Budget
           pre_vote:
             continue_voting: Continue voting
             introduction: Want to vote this project?
             start_voting: Start voting
+          view_all_projects: See all projects
       user_data:
         error:
           only_letters: Only letters and digits are allowed.
@@ -172,3 +180,5 @@ en:
       budgets:
         voting_notification:
           notification: You are now in the voting booth.
+        voting_menubar:
+          cancel_voting: Exit voting booth

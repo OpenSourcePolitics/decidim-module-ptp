@@ -41,13 +41,13 @@ module Decidim
       initializer "decidim_l10n.add_customizations", after: "decidim.action_controller" do
         config.to_prepare do
           # Cells extensions
-          Decidim::Meetings::MeetingMCell.include(
-            ::Decidim::L10n::MeetingMCellExtensions
-          )
+          #Decidim::Meetings::MeetingMCell.include(
+          #  ::Decidim::L10n::MeetingMCellExtensions
+          #)
 
-          Decidim::Debates::DebateMCell.include(
-            ::Decidim::L10n::DebateMCellExtensions
-          )
+          #Decidim::Debates::DebateMCell.include(
+          #  ::Decidim::L10n::DebateMCellExtensions
+          #)
           # Form builders
           Decidim::FormBuilder.include(::Decidim::L10n::FormBuilderExtensions)
 

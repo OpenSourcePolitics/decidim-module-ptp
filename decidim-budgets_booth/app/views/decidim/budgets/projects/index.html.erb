@@ -1,37 +1,48 @@
-<%= render partial: "decidim/shared/component_announcement" %>
+<div class="projects-index">
+  <% add_decidim_page_title t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
+  <%= append_javascript_pack_tag "decidim_budgets" %>
+  <%= append_stylesheet_pack_tag "decidim_budgets" %>
 
-<% cell("decidim/budgets/limit_announcement", budget) %>
+  <%= render layout: "decidim/shared/custom_filters", locals: { filter_sections: , search_variable: :search_text_cont, skip_to_id: "projects" } do %>
+    <%= hidden_field_tag :order, order, id: nil, class: "order_filter" %>
+  <% end %>
+  <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: true } %>
+  <%= cell("decidim/budgets/budget_information_modal", budget) %>
+  <div class="projects-index__container">
+    <% content_for :aside do %>
+      <h1 class="h3 decorator"><%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %></h1>
+    <% end %>
 
-<div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
-  <div class="row columns">
-    <% if voting_finished? %>
-      <h2 class="heading2">
-        <%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
-      </h2>
+    <% if projects.any? %>
+      <%= render partial: "exit_modal" %>
+      <%= render partial: "budget_excess" %>
+      <%= render partial: "budget_confirm" %>
+
+      <%= cell("decidim/budgets/limit_announcement", budget) %>
+      <div class="projects-index__container__header">
+        <div class="flex items-center justify-between">
+          <h2 class="h5 md:h3 decorator">Projects for Vote</h2>
+          <div data-collection-sort-controls>
+            <%= render partial: "order" %>
+          </div>
+          <div class="view-layout__links flex view_mode__links">
+            <%= toggle_view_mode_link(@view_mode, "list", "List mode", params) %>
+            <%= toggle_view_mode_link(@view_mode, "grid", "Grid mode", params) %>
+          </div>
+        </div>
+      </div>
+
+      <section id="projects" class="layout-main__section layout-main__heading">
+        <%= render partial: "projects" %>
+      </section>
     <% else %>
-      <%= render partial: "budget_summary" %>
-      <%= render partial: "cancel_voting_modal" %>
+      <%= cell("decidim/announcement", t("empty", scope: "decidim.budgets.projects")) %>
     <% end %>
   </div>
-
-  <div class="row columns">
-    <h2 class="section-heading">
-      <%= render partial: "count" %>
-    </h2>
-  </div>
-
-  <div class="row">
-    <div class="columns mediumlarge-4 large-3">
-      <%= render partial: "filters_small_view" %>
-      <div class="card card--secondary">
-        <%= render partial: "filters" %>
-      </div>
+  <% unless voting_finished? %>
+    <!--<div class="budget-summary__container">-->
+    <div class="budget-summary__new-container">
+      <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: false } %>
     </div>
-    <div id="projects" class="columns mediumlarge-8 large-9" aria-live="polite">
-      <%= render partial: "projects" %>
-    </div>
-  </div>
+  <% end %>
 </div>
-<%= render partial: "decidim/budgets/partials/voting_help_modal" unless current_workflow.try(:disable_voting_instructions?) %>
-
-<%= javascript_pack_tag("decidim_budgets_booth_voting") %>

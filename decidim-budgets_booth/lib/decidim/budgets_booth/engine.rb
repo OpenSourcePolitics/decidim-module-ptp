@@ -54,9 +54,9 @@ module Decidim
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
 
-          Decidim::Budgets::ProjectListItemCell.include(
-            Decidim::BudgetsBooth::ProjectListItemExtensions
-          )
+          #Decidim::Budgets::ProjectListItemCell.include(
+          #  Decidim::BudgetsBooth::ProjectListItemExtensions
+          #)
 
           Decidim::Budgets::BudgetListItemCell.include(
             Decidim::BudgetsBooth::BudgetListItemCellExtensions
@@ -84,9 +84,9 @@ module Decidim
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )
 
-          Decidim::Budgets::BudgetsController.include(
-            Decidim::BudgetsBooth::BudgetsControllerExtensions
-          )
+          #Decidim::Budgets::BudgetsController.include(
+          #  Decidim::BudgetsBooth::BudgetsControllerExtensions
+          #)
 
           Decidim::Budgets::ProjectsController.include(
             Decidim::BudgetsBooth::ProjectsControllerExtensions

@@ -7,6 +7,9 @@ module Decidim
       include VotingSupport
 
       included do
+        before_action :set_view_mode, only: :index # added
+        layout :determine_layout # added
+
         def index
           raise ActionController::RoutingError, "Not Found" unless budget
 
@@ -26,6 +29,20 @@ module Decidim
         return false if voting_booth_forced? && voting_enabled? && !voted_this?(budget)
 
         true
+      end
+      #added
+      def determine_layout
+        "decidim/budgets/voting_layout"
+      end
+
+      def set_view_mode
+        @view_mode ||= params[:view_mode] || session[:view_mode] || default_view_mode
+        session[:view_mode] = @view_mode
+      end
+
+      def default_view_mode
+        #@default_view_mode ||= current_component.settings.attachments_allowed? ? "grid" : "list"
+        @default_view_mode = "grid"
       end
     end
   end

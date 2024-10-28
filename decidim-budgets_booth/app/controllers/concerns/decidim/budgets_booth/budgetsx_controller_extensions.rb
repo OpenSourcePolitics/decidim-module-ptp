@@ -20,7 +20,7 @@ module Decidim
         def determine_layout
           return layout unless voting_booth_forced?
 
-          return layout unless voting_enabled?
+           return layout unless voting_enabled?
 
           return layout if voted_all_budgets?
 
@@ -32,6 +32,7 @@ module Decidim
         end
 
         def layout
+          #"layouts/decidim/application"
           current_participatory_space_manifest.context(current_participatory_space_context).layout
         end
       end

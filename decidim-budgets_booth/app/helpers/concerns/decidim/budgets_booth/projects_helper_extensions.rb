@@ -68,6 +68,24 @@ module Decidim
       def voting_terms
         translated_attribute(component_settings.try(:voting_terms)).presence
       end
+
+      def toggle_view_mode_link(current_mode, target_mode, title, params)
+        path = budget_projects_path(params.permit(:order, filter: {}).merge({ view_mode: target_mode }))
+        icon_name = target_mode == "grid" ? "layout-grid-fill" : "list-check"
+        icon_class = "view-icon--disabled" unless current_mode == target_mode
+
+        link_to path, remote: true, title: do
+          icon(icon_name, class: icon_class, role: "img", "aria-hidden": true)
+        end
+      end
+
+      def projects_container_class(view_mode)
+        view_mode == "grid" ? "card__grid-grid" : "card__list-list"
+      end
+
+      def card_size_for_view_mode(view_mode)
+        view_mode == "grid" ? :g : :l
+      end
     end
   end
 end

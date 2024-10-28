@@ -1,9 +1,9 @@
 <%= action_authorized_button_to(
   "vote",
-  budget_order_line_item_path(model.budget, project_id: model),
+  budget_order_line_item_path(model.budget, project_id: model, show_only_added: options[:show_only_added], view_mode: options[:view_mode]),
   method: vote_button_method,
   remote: true,
-  class: "button #{scale_up} #{selected_budget} customized-budget display-block project-vote-button",
+  class: "button #{scale_up} budget-list__action project__vote-button button__secondary customized-budget display-block project-#{project.id}-vote-button ",
   data: {
     add: !resource_added?,
     disable: true,

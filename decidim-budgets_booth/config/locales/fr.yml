@@ -69,6 +69,12 @@ fr:
           ready: Je suis prêt
           total_budget: 'Budget total: '
           vote: Voter
+        order_selected_projects:
+          remove: Supprimer
+          selected_projects:
+            one: projet sélectionné
+            other: projets sélectionnés
+          view: Voir
         pre_voting_budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir annuler votre vote ?
           cancel_order: Annuler le vote
@@ -91,10 +97,12 @@ fr:
           close_project: Fermer
           scope: 'Portée : '
         show:
+          budget: Budget
           pre_vote:
             continue_voting: Continuer le vote
             introduction: Vous voulez voter pour ce projet ?
             start_voting: Commencer à voter
+          view_all_projects: Voir tous les projets
       user_data:
         error:
           only_letters: Seules les lettres et les chiffres sont autorisés.
@@ -154,3 +162,5 @@ fr:
       budgets:
         voting_notification:
           notification: Vous êtes dans la cabine de vote.
+        voting_menubar:
+          cancel_voting: Abandonner le vote

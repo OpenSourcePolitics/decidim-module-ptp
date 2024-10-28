@@ -9,9 +9,9 @@ module Decidim
       included do
         delegate :voting_open?, :voting_finished?, to: :controller
 
-        def button_text
-          t(:vote, scope: i18n_scope)
-        end
+        #def button_text
+        #  t(:vote, scope: i18n_scope)
+        #end
 
         def mark_image_as_voted(budget)
           return nil unless voted_this?(budget)
