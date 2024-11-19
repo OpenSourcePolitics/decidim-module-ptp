@@ -1,48 +1,53 @@
-<div class="projects-index">
-  <% add_decidim_page_title t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
-  <%= append_javascript_pack_tag "decidim_budgets" %>
-  <%= append_stylesheet_pack_tag "decidim_budgets" %>
+<% add_decidim_meta_tags(
+     description: translated_attribute(budget.description),
+     title: t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)),
+     url: budget_url(budget),
+     resource: budget) %>
 
-  <%= render layout: "decidim/shared/custom_filters", locals: { filter_sections: , search_variable: :search_text_cont, skip_to_id: "projects" } do %>
+<%= append_javascript_pack_tag "decidim_budgets" %>
+<%= append_javascript_pack_tag "decidim_budgets_booth_voting" %>
+<%= append_stylesheet_pack_tag "decidim_budgets" %>
+
+<%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: true } %>
+<%= cell("decidim/budgets/budget_information_modal", budget) %>
+
+<% content_for :aside do %>
+  <h1 class="h3 decorator"><%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %></h1>
+
+  <%= render layout: "decidim/shared/filters", locals: { filter_sections: , search_variable: :search_text_cont, skip_to_id: "projects" } do %>
     <%= hidden_field_tag :order, order, id: nil, class: "order_filter" %>
   <% end %>
-  <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: true } %>
-  <%= cell("decidim/budgets/budget_information_modal", budget) %>
-  <div class="projects-index__container">
-    <% content_for :aside do %>
-      <h1 class="h3 decorator"><%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %></h1>
-    <% end %>
+<% end %>
 
-    <% if projects.any? %>
-      <%= render partial: "exit_modal" %>
-      <%= render partial: "budget_excess" %>
-      <%= render partial: "budget_confirm" %>
+<%= render layout: "layouts/decidim/shared/layout_two_col" do %>
+  <% if projects.any? %>
+    <%= render partial: "exit_modal" %>
+    <%= render partial: "budget_excess" %>
+    <%= render partial: "budget_confirm" %>
 
-      <%= cell("decidim/budgets/limit_announcement", budget) %>
-      <div class="projects-index__container__header">
-        <div class="flex items-center justify-between">
-          <h2 class="h5 md:h3 decorator">Projects for Vote</h2>
-          <div data-collection-sort-controls>
-            <%= render partial: "order" %>
-          </div>
-          <div class="view-layout__links flex view_mode__links">
-            <%= toggle_view_mode_link(@view_mode, "list", "List mode", params) %>
-            <%= toggle_view_mode_link(@view_mode, "grid", "Grid mode", params) %>
-          </div>
+    <%= cell("decidim/budgets/limit_announcement", budget) %>
+    <div class="projects-index__container__header">
+      <div class="flex items-center justify-between">
+        <h2 class="h5 md:h3 decorator">Projects for Vote</h2>
+        <div data-collection-sort-controls>
+          <%= render partial: "order" %>
+        </div>
+        <div class="view-layout__links flex view_mode__links">
+          <%= toggle_view_mode_link(@view_mode, "list", "List mode", params) %>
+          <%= toggle_view_mode_link(@view_mode, "grid", "Grid mode", params) %>
         </div>
       </div>
-
-      <section id="projects" class="layout-main__section layout-main__heading">
-        <%= render partial: "projects" %>
-      </section>
-    <% else %>
-      <%= cell("decidim/announcement", t("empty", scope: "decidim.budgets.projects")) %>
-    <% end %>
-  </div>
-  <% unless voting_finished? %>
-    <!--<div class="budget-summary__container">-->
-    <div class="budget-summary__new-container">
-      <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: false } %>
     </div>
+
+    <section id="projects" class="layout-main__section layout-main__heading">
+      <%= render partial: "projects" %>
+    </section>
+  <% else %>
+    <%= cell("decidim/announcement", t("empty", scope: "decidim.budgets.projects")) %>
   <% end %>
-</div>
+<% end %>
+<% unless voting_finished? %>
+  <div class="budget-summary__new-container">
+    <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: false } %>
+  </div>
+<% end %>

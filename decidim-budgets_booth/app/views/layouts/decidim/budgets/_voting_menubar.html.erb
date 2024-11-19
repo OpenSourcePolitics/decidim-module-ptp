@@ -2,12 +2,13 @@
 <div id="menu-bar" class="menu-bar__container">
   <div id="menu-bar-custom" class="menu-bar">
     <% if current_workflow.single? %>
-      <%= link_to Decidim::ParticipatoryProcesses::Engine.routes.url_helpers.participatory_process_path(budget.participatory_space), class: 'menu-bar__exit-link' do %>
+      <%#= link_to Decidim::ParticipatoryProcesses::Engine.routes.url_helpers.participatory_process_path(budget.participatory_space), class: 'menu-bar__exit-link' do %>
+      <%= link_to cancel_redirect_path, class: 'menu-bar__exit-link' do %>
         <%= icon "arrow-left-line" %>
         <%= t('.cancel_voting') %>
       <% end %>
     <% else %>
-      <%= link_to budgets_path, class: 'menu-bar__exit-link' do %>
+      <%= link_to cancel_redirect_path, class: 'menu-bar__exit-link' do %>
         <%= icon "arrow-left-line" %>
         <%= t('.cancel_voting') %>
       <% end %>
@@ -20,3 +21,4 @@
     <% end %>
   </div>
 </div>
+

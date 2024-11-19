@@ -9,7 +9,7 @@ const isSafeUrl = (exitUrl) => {
   }
 
   const safeUrls = [
-    $(".budget-summary").attr("data-safe-url").split("?")[0],
+    $(".budget-summary").attr("data-safe-url").replace(location.origin, ""),
     `${location.pathname}#`,
     `${location.href}#`,
     "#"
@@ -18,7 +18,7 @@ const isSafeUrl = (exitUrl) => {
   let safe = false;
   safeUrls.forEach((url) => {
     if (exitUrl.startsWith(url)) {
-      safe =  true
+      safe = true
     }
   });
 
@@ -36,20 +36,32 @@ const allowExitFrom = ($el) => {
     return true;
   } else if ($el.attr("id") === "exit-notification-link") {
     return true;
-  } else if ($el.parents(".voting-wrapper").length > 0) {
+  } else if ($el.parents("main").length > 0) {
     return true;
   } else if (isSafeUrl($el.attr("href"))) {
+    return true
+  } else if (document.querySelector(".panel-container") && document.querySelector(".panel-container").contains($el[0])) {
     return true
   }
 
   return false;
 }
-
+$(function(){
+  const $link = $('.menu-bar__exit-link');
+  if ($link.attr("href").substring(0, 4) == "http"){
+    return;
+  } else if ($link.attr("href")[0] == "/") {
+    $link.attr("href", window.location.origin + $link.attr("href"));
+  } else {
+    $link.attr("href", window.location.origin + "/" + $link.attr("href"));
+  }
+});
 $(() => {
   const $exitNotification = $("#exit-notification");
   const $exitLink = $("#exit-notification-link");
   const defaultExitUrl = $exitLink.attr("href");
   const defaultExitLinkText = $exitLink.text();
+  const signOutPath = window.Decidim.config.get("sign_out_path");
   let exitLinkText = defaultExitLinkText;
 
   if ($exitNotification.length < 1) {
@@ -63,26 +75,25 @@ $(() => {
     } else {
       $exitLink.removeAttr("data-method");
     }
-
     $exitLink.attr("href", url);
-    $exitLink.html(exitLinkText);
-    $exitNotification.foundation("open");
+    $exitLink.text(exitLinkText);
+    window.Decidim.currentDialogs["exit-notification"].open();
   };
 
   $(document).on("click", "a", (event) => {
     exitLinkText = defaultExitLinkText;
-
     const $link = $(event.currentTarget);
+
     if (!allowExitFrom($link)) {
       event.preventDefault();
       openExitNotification($link.attr("href"), $link.data("method"));
     }
   });
-  // Custom handling for the header sign out so that it won't trigger the
+  // Custom handling for the header sign out so that it will not trigger the
   // logout form submit and so that it changes the exit link text. This does
   // not trigger the document link click listener because it has the
   // data-method attribute to trigger a form submit event.
-  $(".header a.sign-out-link").on("click", (event) => {
+  $(`[href='${signOutPath}']`).on("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -93,7 +104,7 @@ $(() => {
   // Custom handling for the exit link which needs to change the exit link
   // text to the default text as this is not handled by the document click
   // listener.
-  $("a[data-open='exit-notification']").on("click", () => {
+  $("a[data-dialog-open='exit-notification']").on("click", () => {
     exitLinkText = defaultExitLinkText;
     openExitNotification(defaultExitUrl);
   });

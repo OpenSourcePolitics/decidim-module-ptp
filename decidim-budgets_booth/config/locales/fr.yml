@@ -27,6 +27,7 @@ fr:
       budgets_list:
         no_budgets_found: Aucun budget n'a été trouvé en fonction de votre code postal. Vous pouvez modifier votre code postal si il est incorrect.
         vote: Afficher
+        voted_on_all_allowed: Vous avez voté sur %{links}. Vous avez voté pour le maximum de budgets autorisé.
       orders:
         modal:
           assigned: 'Attribuer: '

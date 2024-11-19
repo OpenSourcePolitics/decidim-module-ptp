@@ -65,9 +65,9 @@ module Decidim
         current_workflow.try(:voting_booth_forced?)
       end
 
-      def voting_terms
-        translated_attribute(component_settings.try(:voting_terms)).presence
-      end
+      #def voting_terms
+      #  translated_attribute(component_settings.try(:voting_terms)).presence
+      #end
 
       def toggle_view_mode_link(current_mode, target_mode, title, params)
         path = budget_projects_path(params.permit(:order, filter: {}).merge({ view_mode: target_mode }))

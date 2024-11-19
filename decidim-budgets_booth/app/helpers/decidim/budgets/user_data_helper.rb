@@ -15,13 +15,14 @@ module Decidim
       # want to candel the user_data entering, and they don't have a zip code. otherwise we
       # get into infinit redirect loop, since the budgets index path redirects users
       # to this view if they dont have a zip code.
-      def cancel_redirect_path
-        if user_zip_code
-          decidim_budgets.budgets_path
-        else
-          decidim.root_path
-        end
-      end
+
+      #def cancel_redirect_path
+      #  if user_zip_code
+      #    decidim_budgets.budgets_path
+      #  else
+      #    decidim.root_path
+      #  end
+      #end
     end
   end
 end

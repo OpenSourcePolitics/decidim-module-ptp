@@ -28,6 +28,7 @@ en:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
         vote: Show
+        voted_on_all_allowed: You have voted on %{links}. You have voted on the maximum budgets allowed.
       orders:
         modal:
           assigned: 'Assigned: '

@@ -17,11 +17,11 @@
 
 <%= render partial: "exit_modal" %>
 
-<div id="project-item" class="project-show" style="display:flex;flex-direction:column">
+<div id="project-item" class="project-show">
     <%= render partial: "budget_summary", locals: { include_heading: true, project_item: true, responsive: true } %>
     <% content_for :item_header do %>
       <% unless voting_finished? %>
-        <div class="project-show__budget-summary" style="position:sticky;top:0">
+        <div class="project-show__budget-summary">
           <%= render partial: "budget_summary", locals: { include_heading: true, project_item: true, responsive: false } %>
         </div>
         <%= render partial: "budget_excess" %>
@@ -97,5 +97,4 @@
         </ul>
       <% end %>
     <% end %>
-
 </div>

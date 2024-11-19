@@ -26,7 +26,11 @@ module Decidim
           </script>
         HTML
         )
-        snippets.add(:head, helpers.javascript_pack_tag("decidim_handle_voting_complete"))
+        # snippets.add(:head, helpers.javascript_pack_tag("decidim_handle_voting_complete"))
+        snippets.add(:head, <<~HTML
+          <script src="/decidim-packs/js/decidim_handle_voting_complete.js" defer="defer"></script/>
+        HTML
+        )
       end
     end
   end

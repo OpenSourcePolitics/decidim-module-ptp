@@ -47,9 +47,9 @@ module Decidim
           )
 
           # Cells extensions
-          Decidim::Budgets::ProjectVotedHintCell.include(
-            Decidim::BudgetsBooth::ProjectVotedHintCellExtensions
-          )
+          #Decidim::Budgets::ProjectVotedHintCell.include(
+          #  Decidim::BudgetsBooth::ProjectVotedHintCellExtensions
+          #)
           Decidim::Budgets::ProjectVoteButtonCell.include(
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
@@ -58,13 +58,13 @@ module Decidim
           #  Decidim::BudgetsBooth::ProjectListItemExtensions
           #)
 
-          Decidim::Budgets::BudgetListItemCell.include(
-            Decidim::BudgetsBooth::BudgetListItemCellExtensions
-          )
+          #Decidim::Budgets::BudgetListItemCell.include(
+          #  Decidim::BudgetsBooth::BudgetListItemCellExtensions
+          #)
 
-          Decidim::Budgets::BudgetsHeaderCell.include(
-            Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
-          )
+          #Decidim::Budgets::BudgetsHeaderCell.include(
+          #  Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
+          #)
           Decidim::Budgets::BudgetsListCell.include(
             Decidim::BudgetsBooth::VotingSupport
           )
@@ -84,9 +84,9 @@ module Decidim
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )
 
-          #Decidim::Budgets::BudgetsController.include(
-          #  Decidim::BudgetsBooth::BudgetsControllerExtensions
-          #)
+          Decidim::Budgets::BudgetsController.include(
+            Decidim::BudgetsBooth::BudgetsControllerExtensions
+          )
 
           Decidim::Budgets::ProjectsController.include(
             Decidim::BudgetsBooth::ProjectsControllerExtensions
@@ -133,10 +133,10 @@ module Decidim
           settings.attribute :maximum_budgets_to_vote_on, type: :integer, default: 0
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
-          settings.attribute :voting_terms, type: :text, translated: true, editor: true
+          #settings.attribute :voting_terms, type: :text, translated: true, editor: true
           settings.attribute :vote_success_url, type: :string
           settings.attribute :vote_cancel_url, type: :string
-          settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
+          #settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
       end
 
