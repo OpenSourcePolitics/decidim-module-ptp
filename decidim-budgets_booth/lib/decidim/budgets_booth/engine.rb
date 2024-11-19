@@ -47,24 +47,10 @@ module Decidim
           )
 
           # Cells extensions
-          #Decidim::Budgets::ProjectVotedHintCell.include(
-          #  Decidim::BudgetsBooth::ProjectVotedHintCellExtensions
-          #)
           Decidim::Budgets::ProjectVoteButtonCell.include(
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
 
-          #Decidim::Budgets::ProjectListItemCell.include(
-          #  Decidim::BudgetsBooth::ProjectListItemExtensions
-          #)
-
-          #Decidim::Budgets::BudgetListItemCell.include(
-          #  Decidim::BudgetsBooth::BudgetListItemCellExtensions
-          #)
-
-          #Decidim::Budgets::BudgetsHeaderCell.include(
-          #  Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
-          #)
           Decidim::Budgets::BudgetsListCell.include(
             Decidim::BudgetsBooth::VotingSupport
           )
@@ -92,31 +78,9 @@ module Decidim
             Decidim::BudgetsBooth::ProjectsControllerExtensions
           )
 
-          Decidim::Budgets::LineItemsController.include(
-            Decidim::BudgetsBooth::LineItemsControllerExtensions
-          )
-
-          # Commands extensions
-          Decidim::Budgets::Admin::CreateBudget.include(
-            Decidim::BudgetsBooth::CreateBudgetExtensions
-          )
-
-          Decidim::Budgets::Admin::UpdateBudget.include(
-            Decidim::BudgetsBooth::UpdateBudgetExtensions
-          )
-
           # Models extensions
           Decidim::Budgets::Budget.include(
             Decidim::BudgetsBooth::BudgetExtensions
-          )
-          Decidim::User.include(
-            Decidim::BudgetsBooth::UserExtensions
-          )
-          Decidim::Component.include(
-            Decidim::BudgetsBooth::ComponentExtensions
-          )
-          Decidim::Scope.include(
-            Decidim::BudgetsBooth::ScopeExtensions
           )
 
           # Forms extensions
@@ -138,10 +102,6 @@ module Decidim
           settings.attribute :vote_cancel_url, type: :string
           #settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
-      end
-
-      initializer "decidim_budgets.add_zip_code_workflow" do
-        Decidim::Budgets.workflows[:zip_code] = Decidim::BudgetsBooth::Workflows::ZipCode
       end
     end
   end
