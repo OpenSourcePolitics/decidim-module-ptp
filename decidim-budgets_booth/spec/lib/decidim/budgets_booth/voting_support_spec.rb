@@ -27,7 +27,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
       end
 
       def current_workflow
-        Decidim::BudgetsBooth::Workflows::ZipCode.new(current_component, current_user)
+        Decidim::Budgets::Workflows::One.new(current_component, current_user)
       end
 
       def voting_open?
@@ -39,7 +39,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
   let(:component) do
     create(
       :budgets_component,
-      settings: component_settings.merge(workflow: "zip_code"),
+      settings: component_settings.merge(workflow: "one"),
       step_settings: step_settings,
       organization: organization
     )
@@ -52,9 +52,10 @@ describe Decidim::BudgetsBooth::VotingSupport do
   let(:projects_count) { 5 }
   let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 75_000) }
   let(:second_projects) { create_list(:project, 3, budget: budgets.second, budget_amount: 75_000) }
-  let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
+  let(:third_projects) { create_list(:project, 3, budget: budgets.third, budget_amount: 75_000) }
   let!(:order) { create(:order, user: user, budget: budgets.first) }
   let!(:second_order) { create(:order, user: user, budget: budgets.second) }
+  let!(:third_order) { create(:order, user: user, budget: budgets.third) }
 
   include_context "with scoped budgets"
 
@@ -73,7 +74,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
 
   describe "#voted_any?" do
     context "when user exist but not voted" do
-      it "returns flase" do
+      it "returns false" do
         expect(subject).not_to be_voted_any
       end
     end
@@ -103,10 +104,11 @@ describe Decidim::BudgetsBooth::VotingSupport do
         end
       end
 
-      context "when voted all of the busgets" do
+      context "when voted all of the budgets" do
         before do
           vote_this(order, projects.first)
           vote_this(second_order, second_projects.first)
+          vote_this(third_order, third_projects.first)
         end
 
         it "returns true" do
@@ -118,7 +120,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
     context "when maximum_budgets_to_vote_on is set" do
       context "when voted the limit" do
         before do
-          component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1))
+          component.update!(settings: component_settings.merge(workflow: "one", maximum_budgets_to_vote_on: 1))
           vote_this(order, projects.first)
         end
 
@@ -143,7 +145,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
 
     context "when maximum_budgets_to_vote_on is set" do
       before do
-        component.update(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1))
+        component.update(settings: component_settings.merge(workflow: "one", maximum_budgets_to_vote_on: 1))
         vote_this(order, projects.first)
       end
 
@@ -160,7 +162,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
       let(:votes) { "disabled" }
 
       before do
-        component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1), step_settings: step_settings)
+        component.update!(settings: component_settings.merge(workflow: "one", maximum_budgets_to_vote_on: 1), step_settings: step_settings)
         vote_this(order, projects.first)
 
         allow(dummy).to receive(:current_settings).and_return(component.current_settings)

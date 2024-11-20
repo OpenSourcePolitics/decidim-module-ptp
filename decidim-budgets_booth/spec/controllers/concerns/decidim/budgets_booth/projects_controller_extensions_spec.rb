@@ -12,20 +12,17 @@ module Decidim
       end
 
       let(:organization) { create(:organization) }
-      let(:participatory_space) { create(:participatory_process, :with_steps, organization: organization) }
-      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+      let(:user) { create(:user, :confirmed, organization:) }
       let(:component) do
         create(
           :budgets_component,
-          settings: component_settings,
           step_settings: step_settings,
           participatory_space: participatory_space,
           organization: organization
         )
       end
       let(:parent_scope) { create(:scope, organization: organization) }
-      let(:component_settings_base) { { scopes_enabled: true, scope_id: parent_scope.id } }
-      let(:component_settings) { component_settings_base }
       let(:step_settings) { { active_step_id => { votes: votes } } }
       let(:active_step_id) { participatory_space.active_step.id }
       let!(:budgets) { create_list(:budget, 3, component: component) }
@@ -40,99 +37,43 @@ module Decidim
       end
 
       describe "#index" do
-        context "when zip_code workflow" do
-          let(:component_settings) { component_settings_base.merge(workflow: "zip_code") }
-
-          context "when voting enabled" do
-            context "when not voted all budgets" do
-              before do
-                allow(controller).to receive(:voted_this?).and_return(false)
-              end
-
-              it "raises error" do
-                expect do
-                  get :index, params: { budget_id: budgets.last.id }
-                end.to raise_error(ActionController::RoutingError, "Not Found")
-              end
-            end
-
-            context "when voted that budget" do
-              before do
-                allow(controller).to receive(:voted_this?).and_return(true)
-              end
-
-              it "does not raise error" do
-                get :index, params: { budget_id: budgets.last.id }
-                expect(response).to render_template(:index)
-              end
-            end
-          end
-
-          context "when voting is disabled" do
-            let(:votes) { "disabled" }
-
-            it "renders projects index" do
-              get :index, params: { budget_id: budgets.last.id }
-              expect(response).to render_template(:index)
-            end
+        context "when budget" do
+          it "renders index" do
+            get :index, params: { budget_id: budgets.last.id }
+            expect(response).to render_template(:index)
           end
         end
 
-        context "when not zip code workflow" do
-          let(:component_settings) { component_settings_base.merge(workflow: "one") }
-
-          it "renders the index template" do
-            get :index, params: { budget_id: budgets.last.id }
-            expect(response).to render_template(:index)
+        context "when no budget" do
+          it "raises error" do
+            expect do
+              get :index, params: { budget_id: nil }
+            end.to raise_error(ActionController::RoutingError, "Not Found")
           end
         end
       end
 
       describe "#show" do
-        context "when zip_code workflow" do
-          let(:component_settings) { component_settings_base.merge(workflow: "zip_code") }
-
-          context "when voting enabled" do
-            context "when not voted that budget" do
-              before do
-                allow(controller).to receive(:voted_this?).and_return(false)
-              end
-
-              it "raises error" do
-                expect do
-                  get :show, params: { id: project.id, budget_id: budgets.last.id }
-                end.to raise_error(ActionController::RoutingError, "Not Found")
-              end
-            end
-
-            context "when voted that budget" do
-              before do
-                allow(controller).to receive(:voted_this?).and_return(true)
-              end
-
-              it "does not raise error" do
-                get :show, params: { id: project.id, budget_id: budgets.last.id }
-                expect(response).to render_template(:show)
-              end
-            end
-          end
-
-          context "when voting is disabled" do
-            let!(:votes) { "disabled" }
-
-            it "renders projects index" do
-              get :show, params: { id: project.id, budget_id: budgets.last.id }
-              expect(response).to render_template(:show)
-            end
+        context "when budget and project" do
+          it "renders show" do
+            get :show, params: { id: project.id, budget_id: budgets.last.id }
+            expect(response).to render_template(:show)
           end
         end
 
-        context "when not zip code workflow" do
-          let(:component_settings) { component_settings_base.merge(workflow: "one") }
+        context "when budget and no project" do
+          it "raises error" do
+            expect do
+              get :show, params: { id: 1000000, budget_id: budgets.last.id }
+            end.to raise_error(ActionController::RoutingError, "Not Found")
+          end
+        end
 
-          it "renders the index template" do
-            get :show, params: { id: project.id, budget_id: budgets.last.id }
-            expect(response).to render_template(:show)
+        context "when no budget and project" do
+          it "raises error" do
+            expect do
+              get :show, params: { id: project.id, budget_id: nil }
+            end.to raise_error(ActionController::RoutingError, "Not Found")
           end
         end
       end
