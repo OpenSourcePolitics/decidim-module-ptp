@@ -30,7 +30,7 @@ module Decidim
       end
 
       def resource_image_path
-        project.photos.first&.url if project.photos.present?
+        project.photos.first&.url if project.attachments.present?
       end
 
       private

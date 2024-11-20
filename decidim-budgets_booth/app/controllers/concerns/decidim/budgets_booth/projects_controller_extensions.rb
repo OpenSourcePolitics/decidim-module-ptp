@@ -13,23 +13,23 @@ module Decidim
         def index
           raise ActionController::RoutingError, "Not Found" unless budget
 
-          raise ActionController::RoutingError, "Not Found" unless allow_access?
+          #raise ActionController::RoutingError, "Not Found" unless allow_access?
         end
 
         def show
           raise ActionController::RoutingError, "Not Found" unless budget
           raise ActionController::RoutingError, "Not Found" unless project
-          raise ActionController::RoutingError, "Not Found" unless allow_access?
+          #raise ActionController::RoutingError, "Not Found" unless allow_access?
         end
       end
 
       private
 
-      def allow_access?
-        return false if voting_booth_forced? && voting_enabled? && !voted_this?(budget)
-
-        true
-      end
+      #def allow_access?
+      #  return false if voting_booth_forced? && voting_enabled? && !voted_this?(budget)
+      #
+      #  true
+      #end
       #added
       def determine_layout
         "decidim/budgets/voting_layout"

@@ -3,7 +3,7 @@
     <% if has_image? %>
       <%= image_tag resource_image_path, alt: alt_title %>
     <% else %>
-      <%= external_icon "media/images/project-placeholder-card-g.svg", class: "card__project-placeholder-g" %>
+      <%= external_icon "media/images/decidim_budgets.svg", class: "card__project-placeholder-g" %>
     <% end %>
   </div>
   <div class="<%= classes[:text] %>">
@@ -19,8 +19,7 @@
         <%= cell metadata_cell, resource, links: false, skip_state: true, **options %>
       </div>
     <% end %>
-    <!--<div class="budget__card__list-project">-->
-    <div class="budget__card__grid-project" style="display:flex;justify-content:space-between;align-items:center">
+    <div class="budget__card__grid-project">
       <span class="budget__card__grid-project__amount">
       <%= budget_to_currency(project.budget_amount) %>
       </span>

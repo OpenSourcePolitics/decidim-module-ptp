@@ -19,18 +19,19 @@ module Decidim
         private
 
         def determine_layout
-          return layout unless voting_booth_forced?
+          "layouts/decidim/application"
+          #return layout unless voting_booth_forced?
 
-           return layout unless voting_enabled?
+          #return layout unless voting_enabled?
 
-          return layout if voted_all_budgets?
+          #return layout if voted_all_budgets?
 
-          "decidim/budgets/voting_layout"
+          #"decidim/budgets/voting_layout"
         end
 
-        def open_and_voting_booth_forced?
-          voting_booth_forced? && voting_open?
-        end
+        #def open_and_voting_booth_forced?
+        #  voting_booth_forced? && voting_open?
+        #end
 
         def layout
           "layouts/decidim/application"
