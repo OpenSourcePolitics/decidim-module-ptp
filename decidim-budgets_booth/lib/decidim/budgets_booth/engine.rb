@@ -22,10 +22,6 @@ module Decidim
               resources :projects, only: [:show]
             end
             resource :order, only: [:show]
-
-            collection do
-              resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
-            end
           end
         end
       end
@@ -78,15 +74,6 @@ module Decidim
             Decidim::BudgetsBooth::ProjectsControllerExtensions
           )
 
-          # Models extensions
-          Decidim::Budgets::Budget.include(
-            Decidim::BudgetsBooth::BudgetExtensions
-          )
-
-          # Forms extensions
-          Decidim::Budgets::Admin::BudgetForm.include(
-            Decidim::BudgetsBooth::BudgetFormExtensions
-          )
         end
       end
 
