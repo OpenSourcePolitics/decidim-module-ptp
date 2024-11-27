@@ -20,7 +20,7 @@ module Decidim
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("orders.checkout.error", scope: "decidim")
+              flash.now[:alert] = I18n.t("error", scope: "decidim.budgets.orders.checkout")
               redirect_to decidim_budgets.budgets_path
             end
           end
