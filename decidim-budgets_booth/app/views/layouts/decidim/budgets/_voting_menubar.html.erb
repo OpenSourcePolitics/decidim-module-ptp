@@ -13,11 +13,13 @@
         <%= t('.cancel_voting') %>
       <% end %>
     <% end %>
-    <span class="menu-bar__span"">-</span>
-    <h1 class="menu-bar__title"><%= translated_attribute(projects.first.budget.title) %></h1>
+    <span class="menu-bar__span">-</span>
+    <% if projects %>
+      <h1 class="menu-bar__title"><%= budget_title %></h1>
+    <% end %>
     <% if controller.action_name == "show" %>
       <span class="menu-bar__span">-</span>
-      <%= link_to "Back to projects", budget_projects_path %>
+      <%= link_to t('layouts.decidim.budgets.voting_menubar.back_to_projects'), budget_projects_path %>
     <% end %>
   </div>
 </div>

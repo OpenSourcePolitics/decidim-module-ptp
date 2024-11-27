@@ -86,6 +86,10 @@ module Decidim
       def card_size_for_view_mode(view_mode)
         view_mode == "grid" ? :g : :l
       end
+
+      def budget_title
+        decidim_escape_translated(budget.title).html_safe
+      end
     end
   end
 end

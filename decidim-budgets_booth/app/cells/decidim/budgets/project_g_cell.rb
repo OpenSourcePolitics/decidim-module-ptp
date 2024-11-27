@@ -20,7 +20,7 @@ module Decidim
       end
 
       def title
-        present(model).title(html_escape: true)
+        decidim_escape_translated(model.title).html_safe
       end
 
       def metadata_cell = "decidim/budgets/project_metadata"
