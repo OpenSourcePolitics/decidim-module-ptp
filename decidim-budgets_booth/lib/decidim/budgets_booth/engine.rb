@@ -16,11 +16,7 @@ module Decidim
         # "sms" authentication.
         Decidim::Budgets::Engine.routes.prepend do
           resources :budgets do
-            resources :voting, only: [:index]
-
-            namespace :voting do
-              resources :projects, only: [:show]
-            end
+            resources :projects, only: [:show, :index]
             resource :order, only: [:show]
           end
         end
