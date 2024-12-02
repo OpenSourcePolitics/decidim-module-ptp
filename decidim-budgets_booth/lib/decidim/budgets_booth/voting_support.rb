@@ -62,11 +62,12 @@ module Decidim
       end
 
       # maximum_budgets_to_vote_on is being set by the admin. the default is zero, which means users can
-      # vote in all available budgets. to check that user has voted to all available budgets, we should
-      # consider this settings as well.
+      # vote in all available budgets. To check that user has voted to all available budgets, we should
+      # consider this settings as well. If budget component workflow is random or one, available budgets
+      # will be equal to 1
       def voted_all_budgets?
         default_limit = current_component.settings.maximum_budgets_to_vote_on || 0
-        available_budgets = budgets.count
+        available_budgets = ["random", "one"].include?(current_component.settings.workflow) ? 1 : budgets.count
         vote_limit = if default_limit.zero?
                        available_budgets
                      else
@@ -76,13 +77,13 @@ module Decidim
         voted.count >= vote_limit
       end
 
-      # This configuration option can be set in component settings, the dfault url when the user has voted on all budgets
+      # This configuration option can be set in component settings, the default url when the user has voted on all budgets
       # is budgets path
       def success_redirect_path
         component_settings.try(:vote_success_url).presence || decidim_budgets.budgets_path
       end
 
-      # This configuration option can be set in component settings, the dfault url when the user cancels voting is the root path.
+      # This configuration option can be set in component settings, the default url when the user cancels voting is the root path.
       def cancel_redirect_path
         component_settings.try(:vote_cancel_url).presence || decidim.root_path
       end

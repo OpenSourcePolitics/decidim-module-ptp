@@ -7,9 +7,8 @@
     <%= render partial: "order" %>
   </div>
 </div>
-
-<div class="<%= projects_container_class(@view_mode) %>">
-  <%= render partial: "project", collection: projects, as: :project, locals: { card_size: card_size_for_view_mode(@view_mode) } %>
+<div class="budget-list">
+  <%= render partial: "projects_list", locals: { project: } %>
 </div>
 
 <%= decidim_paginate projects %>

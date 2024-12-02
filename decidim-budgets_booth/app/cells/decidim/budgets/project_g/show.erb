@@ -15,7 +15,8 @@
 
     <% if metadata_cell.present? %>
       <div class="<%= classes[:metadata] %>">
-        <%= cell metadata_cell, resource, links: false, skip_state: true, **options %>
+        <%#= cell metadata_cell, resource, links: false, skip_state: true, **options %>
+        <%= cell("decidim/budgets/project_voted_hint", project, class: "margin-left-1") if current_order_checked_out? && resource_added? %>
       </div>
     <% end %>
     <div class="budget__card__grid-project">
