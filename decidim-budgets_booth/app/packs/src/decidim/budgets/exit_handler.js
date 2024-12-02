@@ -83,8 +83,8 @@ $(() => {
   $(document).on("click", "a", (event) => {
     exitLinkText = defaultExitLinkText;
     const $link = $(event.currentTarget);
-
-    if (!allowExitFrom($link)) {
+    // if the clicked link is Back to projects, we don't open the exit-notification modal
+    if (!allowExitFrom($link) && !$link.text().includes("Retour aux projets", "Back to projects")) {
       event.preventDefault();
       openExitNotification($link.attr("href"), $link.data("method"));
     }
