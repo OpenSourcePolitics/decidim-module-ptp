@@ -7,6 +7,10 @@ their vote has not been cast. The idea is to "lock" the user inside a voting
 booth during the voting process and make it extremely clear for them that if
 they exit the voting booth, they have not yet cast their vote.
 
+This module also provides design improvements on the projects index view, like
+the possibility in this view to switch between grid mode and list mode
+(default is grid mode).
+
 ## Usage
 
 This module is built on top of the `decidim-budgets` module and adds extra
