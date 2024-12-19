@@ -17,7 +17,7 @@ fr:
           total_budget: 'Budget total : '
       project_vote_button:
         add_to_vote: Ajouter au vote
-        remove_from_vote: Supprimer du vote
+        remove_from_vote: Ajouté au vote
       projects:
         cancel_voting_modal:
           continue: Continuer le vote
