@@ -46,16 +46,7 @@ const allowExitFrom = ($el) => {
 
   return false;
 }
-$(function(){
-  const $link = $('.menu-bar__exit-link');
-  if ($link.attr("href").substring(0, 4) == "http"){
-    return;
-  } else if ($link.attr("href")[0] == "/") {
-    $link.attr("href", window.location.origin + $link.attr("href"));
-  } else {
-    $link.attr("href", window.location.origin + "/" + $link.attr("href"));
-  }
-});
+
 $(() => {
   const $exitNotification = $("#exit-notification");
   const $exitLink = $("#exit-notification-link");
