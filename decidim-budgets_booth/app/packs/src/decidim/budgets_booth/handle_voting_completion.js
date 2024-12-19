@@ -9,12 +9,24 @@ const initVoteCompleteElement = () => {
 
   const reveal = wrapper.querySelector("div");
   document.body.append(reveal);
-
-  // With foundation we still have to use jQuery.
-  // The purpose is to open the reveal after Foundation has initialized the
-  // reveal element which happens with the Decidim's default JS. This code is
-  // run before that.
-  $(reveal).on("init.zf.reveal", () => $(reveal).foundation("open"));
 }
 
 initVoteCompleteElement();
+$(() => {
+  const $modal = $("#vote-completed");
+  const $buttonConfirm = $("[data-confirm-ok]", $modal);
+  const $buttonCancel = $("[data-confirm-cancel]", $modal);
+  const $buttonClose = $("[data-dialog-closable]", $modal);
+
+  $modal.attr("aria-hidden", false);
+
+  $buttonConfirm.on("click", (ev)=> {
+    $modal.attr("aria-hidden", true)
+  })
+  $buttonCancel.on("click", (ev)=> {
+    $modal.attr("aria-hidden", true)
+  })
+  $buttonClose.on("click", (ev)=> {
+    $modal.attr("aria-hidden", true)
+  })
+});
