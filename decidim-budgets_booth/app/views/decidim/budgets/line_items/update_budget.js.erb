@@ -3,10 +3,12 @@ var $orderProgress = document.querySelectorAll('[id^=order-progress] .budget-sum
 var $projectItem = $('#project-<%= project.id %>-item');
 var $projectVoteButton = $('.project-<%= project.id %>-vote-button');
 var $budgetConfirm = $('#budget-confirm');
+var $orderProgressText = $('.order_progress_text');
 
 $orderProgress.forEach((orderProgress) => {
   var $orderTotalBudget = $(orderProgress).find("[id^=order-total-budget]");
   $orderTotalBudget.html('<%= j(render partial: "decidim/budgets/projects/order_total_budget").strip.html_safe %>');
+  $orderProgressText.html('<%= j(render partial: "decidim/budgets/projects/order_progress_text").strip.html_safe %>');
 
   if(orderProgress.dataset.orderProgressResponsive) {
     morphdom(orderProgress, '<%= j(render partial: "decidim/budgets/projects/order_progress_summary_content", locals: { include_heading: true, responsive: true }).strip.html_safe %>');

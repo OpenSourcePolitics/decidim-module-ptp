@@ -193,15 +193,18 @@ $active-item-color: black;
 }
 //new
 .budget__card__grid-project {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
-@media (max-width: 1366px) {
+
+@media (min-width: 769px) and (max-width: 1040px) {
   .budget__card__grid-project {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
+
 .card__list > .budget__card__list-project{
   display:flex;
   flex-direction: column;
@@ -366,4 +369,15 @@ $active-item-color: black;
 .card__project-placeholder-g{
   width: 100%;
   height: 100%;
+}
+.card__grid-img {
+  background-color: #F3F4F6;
+}
+#budget-booth-body .view-layout__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.card-grid-selected {
+  --tw-ring-color: var(--tertiary);
 }

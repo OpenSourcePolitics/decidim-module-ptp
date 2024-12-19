@@ -1,9 +1,8 @@
-<%= link_to resource_path, class: classes[:default], id: resource_id do %>
+<% project_card = resource_added? ? "card__grid card-grid-selected" : classes[:default] %>
+<%= link_to resource_path, class: project_card, id: resource_id do %>
   <div class="<%= classes[:img] %>">
     <% if has_image? %>
       <%= image_tag resource_image_path, alt: alt_title %>
-    <% else %>
-      <%= external_icon "media/images/decidim_budgets.svg", class: "card__project-placeholder-g" %>
     <% end %>
   </div>
   <div class="<%= classes[:text] %>">
@@ -20,10 +19,10 @@
       </div>
     <% end %>
     <div class="budget__card__grid-project">
+      <%= cell("decidim/budgets/project_vote_button", project, show_only_added:, view_mode:) %>
       <span class="budget__card__grid-project__amount">
       <%= budget_to_currency(project.budget_amount) %>
       </span>
-      <%= cell("decidim/budgets/project_vote_button", project, show_only_added:, view_mode:) %>
     </div>
   </div>
 <% end %>
