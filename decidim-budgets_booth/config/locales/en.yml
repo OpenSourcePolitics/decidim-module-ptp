@@ -2,12 +2,12 @@
 en:
   decidim:
     budgets:
-      budgets:
-        index:
-          not_allowed: You are not allowed to perform this action.
       budgets_list:
-        voted_on_all_allowed: You have voted on %{links}. You have voted on the maximum budgets allowed.
+        voted_on_all_allowed: You have voted on %{links}. You have voted on the maximum
+          budgets allowed.
       orders:
+        checkout:
+          error: There was a problem processing your vote.
         modal:
           assigned: 'Assigned: '
           close: Close window
@@ -19,13 +19,6 @@ en:
         add_to_vote: Add to your vote
         remove_from_vote: Added to vote
       projects:
-        cancel_voting_modal:
-          continue: Continue voting
-          description: If you cancel your vote, it will not be count for the final
-            result. In order to get your vote heard, please go back to cast your vote.
-          exit: I don't want to vote right now
-          label: Exit voting
-          title: Are you sure you don't want to cast your vote?
         index:
           projects_for: Projects for
         order_progress:
@@ -41,14 +34,11 @@ en:
         show:
           budget: Budget
       voting:
-        general:
-          not_open_warning: Voting is not allowed.
         thanks_message_modal:
           continue: Continue
           default_text: Thank you for your participation
           title: Thank you for voting!
         vote_completed_modal:
-          close: Close
           continue: Continue
           title: You successfully completed your votes
         voted_summary_modal:
@@ -58,15 +48,16 @@ en:
           title: Your vote
         voting_notification_event:
           notification_casted: Your vote has been casted
-          notification_title: You have successfully cast your vote for the budget %{budget_name}
+          notification_title: You have successfully cast your vote for the budget
+            %{budget_name}
     components:
       budgets:
         settings:
           global:
             maximum_budgets_to_vote_on: Maximum number of budgets that user can vote
               on (default is 0, which means user can vote on all available budgets)
-            vote_cancel_url: URL to redirect user when canceling voting (default
-              to the root path)
+            vote_cancel_url: URL to redirect user when canceling voting (default to
+              the root path)
             vote_completed_content: Popup text after voting in all available budgets
             vote_success_content: Popup text after each vote
             vote_success_url: URL to redirect user after voting on all available budgets
@@ -74,11 +65,11 @@ en:
   layouts:
     decidim:
       budgets:
+        voting_menubar:
+          back_to_projects: Back to projects
+          cancel_voting: Exit voting booth
         voting_notification:
           notification: You are now in the voting booth.
-        voting_menubar:
-          cancel_voting: Exit voting booth
-          back_to_projects: Back to projects
       shared:
         layout_two_col:
           title: Projects for vote

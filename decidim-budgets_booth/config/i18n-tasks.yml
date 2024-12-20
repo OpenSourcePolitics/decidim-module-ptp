@@ -29,3 +29,15 @@ ignore_missing:
   - decidim.budgets.projects.project_budget_button.add
   - decidim.budgets.projects.project_budget_button.added_descriptive
   - decidim.budgets.projects.projects_for
+  - decidim.budgets.budget_information_modal.more_information
+  - decidim.budgets.projects.budget_confirm.are_you_sure
+  - decidim.budgets.projects.budget_summary.*
+  - decidim.budgets.projects.order_progress.assigned
+  - decidim.budgets.projects.order_progress.budget
+  - decidim.budgets.projects.order_progress.minimum
+  - decidim.searches.filters.search
+  - decidim.searches.filters_small_view.filter
+  - decidim.searches.filters_small_view.filter_and_search
+  - decidim.shared.confirm_modal.cancel
+  - decidim.shared.filter_form_help.*
+  - decidim.components.budgets.name

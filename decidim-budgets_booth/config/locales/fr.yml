@@ -2,12 +2,12 @@
 fr:
   decidim:
     budgets:
-      budgets:
-        index:
-          not_allowed: Vous n'êtes pas autorisé à effectuer cette action.
       budgets_list:
-        voted_on_all_allowed: Vous avez voté sur %{links}. Vous avez voté pour le maximum de budgets autorisé.
+        voted_on_all_allowed: Vous avez voté sur %{links}. Vous avez voté pour le
+          maximum de budgets autorisé.
       orders:
+        checkout:
+          error: Une erreur s'est produite lors du traitement de votre vote.
         modal:
           assigned: 'Attribuer: '
           close: Fermer la fenêtre
@@ -19,12 +19,6 @@ fr:
         add_to_vote: Ajouter au vote
         remove_from_vote: Ajouté au vote
       projects:
-        cancel_voting_modal:
-          continue: Continuer le vote
-          description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
-          exit: Je ne veux pas voter pour le moment
-          label: Quitter le vote
-          title: Êtes-vous certain de vouloir annuler votre vote ?
         index:
           projects_for: Projets pour
         order_progress:
@@ -40,14 +34,11 @@ fr:
         show:
           budget: Budget
       voting:
-        general:
-          not_open_warning: Le vote n'est pas autorisé.
         thanks_message_modal:
           continue: Continuer
           default_text: Merci pour votre participation
           title: Merci pour votre vote!
         vote_completed_modal:
-          close: Fermer
           continue: Continuer
           title: Vous avez complété vos votes avec succès
         voted_summary_modal:
@@ -62,19 +53,24 @@ fr:
       budgets:
         settings:
           global:
-            maximum_budgets_to_vote_on: Nombre maximum de budgets sur lesquels l'utilisateur peut voter (par défaut à 0, ce qui signifie que l'utilisateur peut voter sur tous les budgets disponibles)
-            vote_cancel_url: URL de redirection de l'utilisateur lors de l'annulation du vote (par défaut vers la racine)
-            vote_completed_content: Texte de la modale après avoir voté pour tous les budgets disponibles
+            maximum_budgets_to_vote_on: Nombre maximum de budgets sur lesquels l'utilisateur
+              peut voter (par défaut à 0, ce qui signifie que l'utilisateur peut voter
+              sur tous les budgets disponibles)
+            vote_cancel_url: URL de redirection de l'utilisateur lors de l'annulation
+              du vote (par défaut vers la racine)
+            vote_completed_content: Texte de la modale après avoir voté pour tous
+              les budgets disponibles
             vote_success_content: Modale après chaque vote
-            vote_success_url: URL de redirection de l'utilisateur après avoir voté pour tous les budgets disponibles (par défaut vers la liste des budgets)
+            vote_success_url: URL de redirection de l'utilisateur après avoir voté
+              pour tous les budgets disponibles (par défaut vers la liste des budgets)
   layouts:
     decidim:
       budgets:
+        voting_menubar:
+          back_to_projects: Retour aux projets
+          cancel_voting: Abandonner le vote
         voting_notification:
           notification: Vous êtes dans la cabine de vote.
-        voting_menubar:
-          cancel_voting: Abandonner le vote
-          back_to_projects: Retour aux projets
       shared:
         layout_two_col:
           title: Projets à voter
