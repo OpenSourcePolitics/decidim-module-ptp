@@ -52,7 +52,7 @@ describe "Orders" do
 
       context "when voting by percentage threshold" do
         it "displays description messages" do
-          within ".budget-summary", match: :first do
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Start adding projects. Assign at least €70,000,000 to the projects you want and vote according to your preferences to define the budget.")
           end
         end
@@ -67,7 +67,8 @@ describe "Orders" do
         end
 
         it "displays description messages" do
-          within ".budget-summary", match: :first do
+          # text has been moved above filters in project index page
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Start adding projects. Select at least 3 projects you want and vote according to your preferences to define the budget.")
           end
         end
@@ -83,7 +84,7 @@ describe "Orders" do
         end
 
         it "displays description messages" do
-          within ".budget-summary", match: :first do
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Start adding projects. Select up to 6 projects you want and vote according to your preferences to define the budget.")
           end
         end
@@ -98,7 +99,7 @@ describe "Orders" do
         end
 
         it "displays description messages" do
-          within ".budget-summary", match: :first do
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Start adding projects. Select at least 3 and up to 6 projects you want and vote according to your preferences to define the budget.")
           end
         end
@@ -109,7 +110,7 @@ describe "Orders" do
 
         it "displays total budget" do
           within ".budget-summary", match: :first do
-            expect(page).to have_content("€0\nBudget")
+            expect(page).to have_content("€0\nAssigned")
           end
         end
       end
@@ -126,7 +127,7 @@ describe "Orders" do
             page.find(".budget-list__action").click
           end
 
-          expect(page).to have_text "Remove from vote", count: 1
+          expect(page).to have_text "Added to vote", count: 1
 
           within ".budget-summary__progressbar-marks", match: :first do
             expect(page).to have_content(/€25,000,000\sAssigned/)
@@ -159,7 +160,7 @@ describe "Orders" do
             page.find(".budget-list__action").click
           end
 
-          expect(page).to have_text "Remove from vote", count: 1
+          expect(page).to have_text "Added to vote", count: 1
 
           within ".budget-summary__progressbar-marks", match: :first do
             expect(page).to have_content(/€25,000,000\sAssigned/)
@@ -193,7 +194,7 @@ describe "Orders" do
             page.find(".budget-list__action").click
           end
 
-          expect(page).to have_text "Remove from vote", count: 1
+          expect(page).to have_text "Added to vote", count: 1
 
           within ".budget-summary__progressbar-marks", match: :first do
             expect(page).to have_content "1 / 6"
@@ -226,7 +227,7 @@ describe "Orders" do
             page.find(".budget-list__action").click
           end
 
-          expect(page).to have_text "Remove from vote", count: 1
+          expect(page).to have_text "Added to vote", count: 1
           within ".budget-summary__progressbar-marks", match: :first do
             expect(page).to have_content "1 / 6"
           end
@@ -366,7 +367,7 @@ describe "Orders" do
             page.find(".budget-list__action").click
           end
 
-          expect(page).to have_text "Remove from vote", count: 2
+          expect(page).to have_text "Added to vote", count: 2
 
           within "#order-progress .budget-summary__content", match: :first do
             page.find(".button", match: :first).click
@@ -390,7 +391,7 @@ describe "Orders" do
         end
 
         it "shows the rule description" do
-          within ".budget-summary", match: :first do
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Assign at least €70,000,000 to the projects you want and vote")
           end
         end
@@ -464,7 +465,7 @@ describe "Orders" do
         it "shows the rule description" do
           visit_budget
 
-          within ".budget-summary", match: :first do
+          within ".layout-2col__aside", match: :first do
             expect(page).to have_content("Select at least 3 projects you want and vote")
           end
         end
@@ -474,7 +475,7 @@ describe "Orders" do
             visit_budget
 
             within "#order-progress", match: :first do
-              expect(page).to have_button("Vote", disabled: true)
+              expect(page).to have_button("Vote budget", disabled: true)
             end
           end
         end
@@ -592,7 +593,7 @@ describe "Orders" do
           create(:budgets_component,
                  manifest:,
                  participatory_space: participatory_process,
-                 settings: { maximum_budgets_to_vote_on: 5, vote_success_content: "Thanks for voting to that great budget" }
+                 settings: { workflow: "all", maximum_budgets_to_vote_on: 5, vote_success_content: "Thanks for voting to that great budget" }
                  )
         end
         let!(:projects) { create_list(:project, 3, budget:, budget_amount: 70_000_000) }
@@ -708,7 +709,7 @@ describe "Orders" do
       it "renders selected projects" do
         visit_budget
 
-        expect(page).to have_css(".card__list-metadata .success", count: 2)
+        expect(page).to have_css(".card__list-metadata", count: 2)
       end
 
       it "does not show a filter to select added projects" do

@@ -43,8 +43,8 @@ module Decidim::Budgets
       context "when the project has no image" do
         before { allow(project).to receive(:attachments).and_return([]) }
 
-        it "renders a placeholder image" do
-          expect(subject).to have_css(".card__project-placeholder-g")
+        it "renders the project without image" do
+          expect(subject).not_to have_css("img")
         end
       end
     end

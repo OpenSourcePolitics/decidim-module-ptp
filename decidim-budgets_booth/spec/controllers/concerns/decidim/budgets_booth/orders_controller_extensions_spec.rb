@@ -32,10 +32,13 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
 
   describe "#checkout" do
     context "when command call returns ok" do
+      before do
+        component.update!(settings: { workflow: "all" })
+      end
       it "sets thanks session and redirects the user" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
-        expect(response).to redirect_to(decidim_budgets.budgets_path)
         expect(session[:booth_thanks_message]).to be(true)
+        expect(response).to redirect_to(decidim_budgets.budgets_path)
       end
 
       it "enqueues job" do
