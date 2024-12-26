@@ -64,30 +64,6 @@ describe Decidim::BudgetsBooth::VotingSupport do
     allow(dummy).to receive_messages(component: component, user: user, organization: organization, current_settings: component.current_settings)
   end
 
-  describe "#voting_enabled?" do
-    it "is enabled by default" do
-      expect(subject).to be_voting_enabled
-    end
-  end
-
-  describe "#voted_any?" do
-    context "when user exist but not voted" do
-      it "returns false" do
-        expect(subject).not_to be_voted_any
-      end
-    end
-
-    context "when voted" do
-      before do
-        vote_this(order, projects.first)
-      end
-
-      it "returns true" do
-        expect(subject.voted_any?).to be(true)
-      end
-    end
-  end
-
   describe "#voted_all_budgets?" do
     context "when maximum_budgets_to_vote_on is not set" do
       context "when not voted all of the budgets" do
@@ -127,46 +103,50 @@ describe Decidim::BudgetsBooth::VotingSupport do
     end
   end
 
-  describe "#hide_unvoted?" do
-    context "when maximum_budgets_to_vote_on is not set" do
+  describe "#success_redirect_path" do
+    context "when vote_succes_url is defined" do
       before do
-        vote_this(order, projects.first)
+        component.update!(settings: component_settings.merge(vote_success_url: "http://budget.org"))
+        allow(dummy).to receive(:component_settings).and_return(component.settings)
       end
 
-      it "does not hide any budgets" do
-        expect(subject.hide_unvoted?(budgets.first)).to be(false)
-        expect(subject.hide_unvoted?(budgets.second)).to be(false)
+      it "returns vote_success_url" do
+        expect(subject.success_redirect_path).to eq(component.settings.vote_success_url)
       end
     end
 
-    context "when maximum_budgets_to_vote_on is set" do
+    context "when vote_succes_url is not defined" do
       before do
-        component.update(settings: component_settings.merge(maximum_budgets_to_vote_on: 1))
-        vote_this(order, projects.first)
+        component.update!(settings: component_settings.merge(vote_success_url: nil))
+        allow(dummy).to receive(:component_settings).and_return(component.settings)
       end
 
-      it "does not hide voted budgets" do
-        expect(subject.hide_unvoted?(budgets.first)).to be(false)
+      it "returns budgets_path" do
+        expect(subject.success_redirect_path).to eq(Decidim::EngineRouter.main_proxy(component).budgets_path)
+      end
+    end
+  end
+
+  describe "#cancel_redirect_path" do
+    context "when vote_cancel_url is defined" do
+      before do
+        component.update!(settings: component_settings.merge(vote_cancel_url: "http://budget.org"))
+        allow(dummy).to receive(:component_settings).and_return(component.settings)
       end
 
-      it "hides unvoted budgets" do
-        expect(subject.hide_unvoted?(budgets.second)).to be(true)
+      it "returns vote_cancel_url" do
+        expect(subject.cancel_redirect_path).to eq(component.settings.vote_cancel_url)
       end
     end
 
-    context "when voting is not open" do
-      let(:votes) { "disabled" }
-
+    context "when vote_cancel_url is not defined" do
       before do
-        component.update!(settings: component_settings.merge(maximum_budgets_to_vote_on: 1), step_settings: step_settings)
-        vote_this(order, projects.first)
-
-        allow(dummy).to receive(:current_settings).and_return(component.current_settings)
+        component.update!(settings: component_settings.merge(vote_cancel_url: nil))
+        allow(dummy).to receive_messages(component_settings: component.settings, decidim: Decidim::EngineRouter.main_proxy(component))
       end
 
-      it "does not hide unvoted budgets, even when the maximum is reached" do
-        expect(subject.hide_unvoted?(budgets.first)).to be(false)
-        expect(subject.hide_unvoted?(budgets.second)).to be(false)
+      it "returns budgets_path" do
+        expect(subject.cancel_redirect_path).to eq(Decidim::EngineRouter.main_proxy(component).root_path)
       end
     end
   end
