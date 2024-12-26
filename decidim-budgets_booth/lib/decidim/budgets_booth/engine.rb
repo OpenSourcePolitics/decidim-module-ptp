@@ -69,7 +69,6 @@ module Decidim
           Decidim::Budgets::ProjectsController.include(
             Decidim::BudgetsBooth::ProjectsControllerExtensions
           )
-
         end
       end
 
@@ -80,10 +79,8 @@ module Decidim
           settings.attribute :maximum_budgets_to_vote_on, type: :integer, default: 0
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
-          #settings.attribute :voting_terms, type: :text, translated: true, editor: true
           settings.attribute :vote_success_url, type: :string
           settings.attribute :vote_cancel_url, type: :string
-          #settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
       end
     end
