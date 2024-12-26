@@ -17,7 +17,7 @@ module Decidim
         case @options[:size]
         when :s
           "decidim/budgets/project_s"
-        when :g #added
+        when :g # added
           "decidim/budgets/project_g"
         else
           "decidim/budgets/project_l"
