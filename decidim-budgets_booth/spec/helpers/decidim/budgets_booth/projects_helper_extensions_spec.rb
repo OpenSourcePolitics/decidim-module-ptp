@@ -3,49 +3,57 @@
 require "spec_helper"
 
 describe Decidim::BudgetsBooth::ProjectsHelperExtensions, type: :helper do
-  describe "#current_phase" do
-    let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
-    let!(:step_one) do
-      create(:participatory_process_step,
-             active: true,
-             end_date: Time.zone.now.to_date,
-             participatory_process: participatory_process)
-    end
-    let!(:step_two) do
-      create(:participatory_process_step,
-             active: false,
-             end_date: 1.month.from_now.to_date,
-             participatory_process: participatory_process)
-    end
+  let(:organization) { create(:organization) }
+  let(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:step_one) do
+    create(:participatory_process_step,
+           active: true,
+           end_date: Time.zone.now.to_date,
+           participatory_process: participatory_process)
+  end
+  let!(:step_two) do
+    create(:participatory_process_step,
+           active: false,
+           end_date: 1.month.from_now.to_date,
+           participatory_process: participatory_process)
+  end
 
-    before do
-      allow(helper).to receive_messages(current_organization: organization, params: { participatory_process_slug: participatory_process.slug })
-    end
+  before do
+    allow(helper).to receive_messages(current_organization: organization, params: { participatory_process_slug: participatory_process.slug })
+  end
 
-    it "returns the title of the active step in the current participatory process" do
-      expect(helper.current_phase).to eq(step_one.title)
-    end
+  describe "#projects_container_class" do
+    context "when view mode is grid" do
+      let(:view_mode) { "grid" }
 
-    context "when there is no active step in the current participatory process" do
-      before do
-        step_one.update(active: false)
-      end
-
-      it "returns nil" do
-        expect(helper.current_phase).to be_nil
+      it "returns the grid class" do
+        expect(helper.projects_container_class(view_mode)).to eq("card__grid-grid")
       end
     end
 
-    context "when the current participatory process cannot be found" do
-      before do
-        # rubocop:disable RSpec/AnyInstance
-        allow_any_instance_of(Decidim::ParticipatoryProcessStep).to receive(:title).and_return(nil)
-        # rubocop:enable RSpec/AnyInstance
-      end
+    context "when view mode is list" do
+      let(:view_mode) { "list" }
 
-      it "returns nil" do
-        expect(helper.current_phase).to be_nil
+      it "returns the list class" do
+        expect(helper.projects_container_class(view_mode)).to eq("card__list-list")
+      end
+    end
+  end
+
+  describe "#card_size_for_view_mode" do
+    context "when view mode is grid" do
+      let(:view_mode) { "grid" }
+
+      it "returns the grid symbol" do
+        expect(helper.card_size_for_view_mode(view_mode)).to eq(:g)
+      end
+    end
+
+    context "when view mode is list" do
+      let(:view_mode) { "list" }
+
+      it "returns the list symbol" do
+        expect(helper.card_size_for_view_mode(view_mode)).to eq(:l)
       end
     end
   end
