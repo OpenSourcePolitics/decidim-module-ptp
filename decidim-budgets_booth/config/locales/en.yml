@@ -41,11 +41,6 @@ en:
         vote_completed_modal:
           continue: Continue
           title: You successfully completed your votes
-        voted_summary_modal:
-          continue: Continue
-          label: Close
-          list_description: These are the projects you picked.
-          title: Your vote
         voting_notification_event:
           notification_casted: Your vote has been casted
           notification_title: You have successfully cast your vote for the budget
