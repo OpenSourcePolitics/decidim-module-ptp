@@ -1,13 +1,14 @@
 ---
 fr:
   decidim:
+    orders:
+      checkout:
+        error: Une erreur s'est produite lors du traitement de votre vote.
     budgets:
       budgets_list:
         voted_on_all_allowed: Vous avez voté sur %{links}. Vous avez voté pour le
           maximum de budgets autorisé.
       orders:
-        checkout:
-          error: Une erreur s'est produite lors du traitement de votre vote.
         modal:
           assigned: 'Attribuer: '
           close: Fermer la fenêtre

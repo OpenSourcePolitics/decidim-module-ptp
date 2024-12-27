@@ -1,13 +1,14 @@
 ---
 en:
   decidim:
+    orders:
+      checkout:
+        error: There was a problem processing your vote.
     budgets:
       budgets_list:
         voted_on_all_allowed: You have voted on %{links}. You have voted on the maximum
           budgets allowed.
       orders:
-        checkout:
-          error: There was a problem processing your vote.
         modal:
           assigned: 'Assigned: '
           close: Close window
