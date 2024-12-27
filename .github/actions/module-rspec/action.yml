@@ -39,14 +39,14 @@ runs:
       name: Precompile assets
       working-directory: ./spec/decidim_dummy_app/
       shell: "bash"
-    - run: bundle exec rspec
-      name: RSpec
-      working-directory: ${{ inputs.name }}
-      shell: "bash"
     - name: Debug missing keys
       run: |
         bundle exec i18n-tasks health
         bundle exec i18n-tasks missing
+      shell: "bash"
+    - run: bundle exec rspec
+      name: RSpec
+      working-directory: ${{ inputs.name }}
       shell: "bash"
     - uses: codecov/codecov-action@v3
     - uses: actions/upload-artifact@v3
