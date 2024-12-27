@@ -43,10 +43,10 @@ runs:
       name: RSpec
       working-directory: ${{ inputs.name }}
       shell: "bash"
-    - run: |
-      bundle exec i18n-tasks health
-      bundle exec i18n-tasks missing
-      name: Debug missing keys
+    - name: Debug missing keys
+      run: |
+        bundle exec i18n-tasks health
+        bundle exec i18n-tasks missing
       shell: "bash"
     - uses: codecov/codecov-action@v3
     - uses: actions/upload-artifact@v3
