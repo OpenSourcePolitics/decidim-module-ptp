@@ -772,7 +772,7 @@ GEM
     unaccent (0.4.0)
     unicode-display_width (2.6.0)
     uniform_notifier (1.16.0)
-    uri (0.13.1)
+    uri (1.0.2)
     valid_email2 (4.0.6)
       activemodel (>= 3.2)
       mail (~> 2.5)
@@ -830,6 +830,7 @@ DEPENDENCIES
   puma (>= 6.3.1)
   rubocop-faker
   spring
+  uri (~> 1.0.2)
   web-console (~> 4.2)
 
 RUBY VERSION
