@@ -31,9 +31,15 @@ module Decidim
 
       def add_javascript_file
         if Rails.env.test?
-          <<~HTML
-            <script src="/packs-test/js/decidim_handle_voting_complete.js" defer="defer"></script/>
-          HTML
+          if File.exist?(Rails.root.join("public", "packs-test", "js", "decidim_handle_voting_complete.js"))
+            <<~HTML
+              <script src="/packs-test/js/decidim_handle_voting_complete.js" defer="defer"></script>
+            HTML
+          else
+            <<~HTML
+              <script src="/decidim-packs/js/decidim_handle_voting_complete.js" defer="defer"></script>
+            HTML
+          end
         else
           <<~HTML
             <script src="/decidim-packs/js/decidim_handle_voting_complete.js" defer="defer"></script/>
