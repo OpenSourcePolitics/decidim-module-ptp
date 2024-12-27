@@ -1,9 +1,6 @@
 ---
 en:
   decidim:
-    orders:
-      checkout:
-        error: There was a problem processing your vote.
     budgets:
       budgets_list:
         voted_on_all_allowed: You have voted on %{links}. You have voted on the maximum
@@ -58,6 +55,9 @@ en:
             vote_success_content: Popup text after each vote
             vote_success_url: URL to redirect user after voting on all available budgets
               (default is budgets list)
+    orders:
+      checkout:
+        error: There was a problem processing your vote.
   layouts:
     decidim:
       budgets:
