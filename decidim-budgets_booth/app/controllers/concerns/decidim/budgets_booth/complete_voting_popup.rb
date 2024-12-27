@@ -32,7 +32,7 @@ module Decidim
       def add_javascript_file
         if Rails.env.test?
           <<~HTML
-            <script src="/packs-test/js/decidim_handle_voting_complete.js" defer="defer"></script/>
+            <script src="#{ActionController::Base.helpers.asset_pack_path('decidim_handle_voting_complete.js')}" defer="defer"></script>
           HTML
         else
           <<~HTML
