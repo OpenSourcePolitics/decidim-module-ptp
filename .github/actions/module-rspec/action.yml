@@ -39,10 +39,6 @@ runs:
       name: Precompile assets
       working-directory: ./spec/decidim_dummy_app/
       shell: "bash"
-    - run: ls -R public/packs-test/js
-      name: Debug assets
-      working-directory: ./spec/decidim_dummy_app/
-      shell: "bash"
     - run: bundle exec rspec
       name: RSpec
       working-directory: ${{ inputs.name }}
