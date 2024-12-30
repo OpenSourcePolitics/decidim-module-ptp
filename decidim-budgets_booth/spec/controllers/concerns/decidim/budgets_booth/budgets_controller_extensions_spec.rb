@@ -15,7 +15,7 @@ module Decidim
         let(:organization) { create(:organization) }
         let(:component) { create(:budgets_component, organization:, settings: component_settings) }
         let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-        let(:component_settings) { { votes: "enabled" }  }
+        let(:component_settings) { { votes: "enabled" } }
         let!(:budgets) do
           [].tap do |list|
             list << create(:budget, component:)
@@ -24,31 +24,29 @@ module Decidim
           end
         end
 
-
         before do
           request.env["decidim.current_organization"] = organization
           request.env["decidim.current_participatory_space"] = component.participatory_space
           request.env["decidim.current_component"] = component
         end
 
-          context "when voting enabled" do
-            it "renders index with budgets_booth application layout" do
-              get :index
-              expect(response).to render_template(:index, layout: "layouts/decidim/application")
-            end
+        context "when voting enabled" do
+          it "renders index with budgets_booth application layout" do
+            get :index
+            expect(response).to render_template(:index, layout: "layouts/decidim/application")
+          end
+        end
+
+        context "when voting is not enabled" do
+          before do
+            component.update(settings: component_settings.merge(votes: "finished"))
           end
 
-          context "when voting is not enabled" do
-            before do
-              component.update(settings: component_settings.merge(votes: "finished"))
-            end
-
-            it "renders index with budgets_booth voting_layout" do
-              get :index
-              expect(response).to render_template(:index, layout: "decidim/budgets/voting_layout")
-            end
+          it "renders index with budgets_booth voting_layout" do
+            get :index
+            expect(response).to render_template(:index, layout: "decidim/budgets/voting_layout")
           end
-
+        end
       end
     end
   end

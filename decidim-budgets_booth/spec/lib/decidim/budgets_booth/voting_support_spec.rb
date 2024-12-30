@@ -40,28 +40,28 @@ describe Decidim::BudgetsBooth::VotingSupport do
     create(
       :budgets_component,
       settings: component_settings.merge(workflow: "all"),
-      step_settings: step_settings,
-      organization: organization
+      step_settings:,
+      organization:
     )
   end
-  let(:step_settings) { { active_step_id => { votes: votes } } }
+  let(:step_settings) { { active_step_id => { votes: } } }
   let(:votes) { "enabled" }
   let(:active_step_id) { component.participatory_space.active_step.id }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:projects_count) { 5 }
   let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 75_000) }
   let(:second_projects) { create_list(:project, 3, budget: budgets.second, budget_amount: 75_000) }
   let(:third_projects) { create_list(:project, 3, budget: budgets.third, budget_amount: 75_000) }
-  let!(:order) { create(:order, user: user, budget: budgets.first) }
-  let!(:second_order) { create(:order, user: user, budget: budgets.second) }
-  let!(:third_order) { create(:order, user: user, budget: budgets.third) }
+  let!(:order) { create(:order, user:, budget: budgets.first) }
+  let!(:second_order) { create(:order, user:, budget: budgets.second) }
+  let!(:third_order) { create(:order, user:, budget: budgets.third) }
 
   include_context "with scoped budgets"
 
   before do
     component.update!(settings: component_settings.merge(workflow: "all"))
-    allow(dummy).to receive_messages(component: component, user: user, organization: organization, current_settings: component.current_settings)
+    allow(dummy).to receive_messages(component:, user:, organization:, current_settings: component.current_settings)
   end
 
   describe "#voted_all_budgets?" do

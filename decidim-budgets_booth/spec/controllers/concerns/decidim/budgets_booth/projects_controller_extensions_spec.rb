@@ -17,15 +17,15 @@ module Decidim
       let(:component) do
         create(
           :budgets_component,
-          step_settings: step_settings,
-          participatory_space: participatory_space,
-          organization: organization
+          step_settings:,
+          participatory_space:,
+          organization:
         )
       end
-      let(:parent_scope) { create(:scope, organization: organization) }
-      let(:step_settings) { { active_step_id => { votes: votes } } }
+      let(:parent_scope) { create(:scope, organization:) }
+      let(:step_settings) { { active_step_id => { votes: } } }
       let(:active_step_id) { participatory_space.active_step.id }
-      let!(:budgets) { create_list(:budget, 3, component: component) }
+      let!(:budgets) { create_list(:budget, 3, component:) }
       let(:project) { create(:project, budget: budgets.last) }
       let(:votes) { "enabled" }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
@@ -64,7 +64,7 @@ module Decidim
         context "when budget and no project" do
           it "raises error" do
             expect do
-              get :show, params: { id: 1000000, budget_id: budgets.last.id }
+              get :show, params: { id: 1_000_000, budget_id: budgets.last.id }
             end.to raise_error(ActionController::RoutingError, "Not Found")
           end
         end

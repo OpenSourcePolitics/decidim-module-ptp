@@ -329,7 +329,7 @@ describe "Orders" do
 
       #  page.find_by_id("exit-notification-link").click
       #  expect(page).to have_content("Logged out successfully")
-      #end
+      # end
 
       context "and try to vote a project that exceed the total budget" do
         let!(:expensive_project) { create(:project, budget:, budget_amount: 250_000_000) }
@@ -501,8 +501,7 @@ describe "Orders" do
           create(:budgets_component,
                  manifest:,
                  participatory_space: participatory_process,
-                 settings: { maximum_budgets_to_vote_on: 1, vote_completed_content: "You have completed your votes" }
-                 )
+                 settings: { maximum_budgets_to_vote_on: 1, vote_completed_content: "You have completed your votes" })
         end
         let!(:projects) { create_list(:project, 3, budget:, budget_amount: 70_000_000) }
         let(:budget_two) { create(:budget, component:) }
@@ -510,9 +509,9 @@ describe "Orders" do
 
         it "can only vote for one budget and display the vote-conpleted modal" do
           visit_budget
-          #confirm the pending order
+          # confirm the pending order
           within ".budget-summary__progressbox-buttons" do
-            page.find('button').click
+            page.find("button").click
           end
           expect(page).to have_css("#budget-confirm", visible: :visible)
 
@@ -532,7 +531,7 @@ describe "Orders" do
           # can't access projects from second budget
           within "#budgets" do
             within ".budget__card__highlight-vote" do
-              expect(page).to have_button('See projects', disabled: true)
+              expect(page).to have_button("See projects", disabled: true)
             end
           end
         end
@@ -543,8 +542,7 @@ describe "Orders" do
           create(:budgets_component,
                  manifest:,
                  participatory_space: participatory_process,
-                 settings: { vote_success_url: "/processes" }
-                 )
+                 settings: { vote_success_url: "/processes" })
         end
         let!(:projects) { create_list(:project, 3, budget:, budget_amount: 70_000_000) }
 
@@ -552,7 +550,7 @@ describe "Orders" do
           visit_budget
           # confirm the pending order
           within ".budget-summary__progressbox-buttons" do
-            page.find('button').click
+            page.find("button").click
           end
           expect(page).to have_css("#budget-confirm", visible: :visible)
 
@@ -569,19 +567,18 @@ describe "Orders" do
           create(:budgets_component,
                  manifest:,
                  participatory_space: participatory_process,
-                 settings: { vote_cancel_url: "/processes" }
-                 )
+                 settings: { vote_cancel_url: "/processes" })
         end
 
         it "redirects to vote_cancel_url when order is cancelled" do
           visit_budget
           # exit voting booth with pending order
           within "#menu-bar-custom" do
-            page.find('.menu-bar__exit-link').click
+            page.find(".menu-bar__exit-link").click
           end
           # click on exit button in modal
           within "#exit-notification-content" do
-            page.find('#exit-notification-link').click
+            page.find("#exit-notification-link").click
           end
           # check we are in processes index
           expect(page).to have_css("h1", text: "Processes")
@@ -593,8 +590,7 @@ describe "Orders" do
           create(:budgets_component,
                  manifest:,
                  participatory_space: participatory_process,
-                 settings: { workflow: "all", maximum_budgets_to_vote_on: 5, vote_success_content: "Thanks for voting to that great budget" }
-                 )
+                 settings: { workflow: "all", maximum_budgets_to_vote_on: 5, vote_success_content: "Thanks for voting to that great budget" })
         end
         let!(:projects) { create_list(:project, 3, budget:, budget_amount: 70_000_000) }
         let(:budget_two) { create(:budget, component:) }
@@ -604,7 +600,7 @@ describe "Orders" do
           visit_budget
           # confirm the pending order
           within ".budget-summary__progressbox-buttons" do
-            page.find('button').click
+            page.find("button").click
           end
           expect(page).to have_css("#budget-confirm", visible: :visible)
 
@@ -672,7 +668,7 @@ describe "Orders" do
       end
     end
 
-    #context "and show votes are enabled" do
+    # context "and show votes are enabled" do
     #  let!(:component) do
     #    create(:budgets_component,
     #           :with_show_votes_enabled,
@@ -688,14 +684,14 @@ describe "Orders" do
     #    order
     #  end
 
-      #it "displays the number of votes for a project" do
-      #  visit_budget
+    # it "displays the number of votes for a project" do
+    #  visit_budget
 
     #   within "#project-#{project.id}-item .card__grid" do
     #      expect(page).to have_css(".project-votes", text: "1 vote")
     #    end
     #  end
-    #end
+    # end
 
     context "and votes are finished" do
       let!(:component) do

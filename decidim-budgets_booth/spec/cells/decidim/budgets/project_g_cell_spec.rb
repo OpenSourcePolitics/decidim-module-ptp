@@ -8,7 +8,6 @@ module Decidim::Budgets
 
     subject(:cell_html) { my_cell.call }
 
-
     let(:my_cell) { cell("decidim/budgets/project_g", project, card_size: :g) }
     let!(:organization) { create(:organization) }
     let!(:budgets_component) { create(:budgets_component, organization:) }
@@ -50,4 +49,3 @@ module Decidim::Budgets
     end
   end
 end
-

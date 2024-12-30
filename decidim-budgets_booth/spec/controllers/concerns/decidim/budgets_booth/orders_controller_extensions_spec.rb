@@ -14,10 +14,10 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
   let(:user) { create(:user, :confirmed, organization:) }
   let(:component) { create(:budgets_component, organization:) }
   let(:projects_count) { 5 }
-  let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
+  let!(:budgets) { create_list(:budget, 3, component:, total_budget: 100_000_000) }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 75_000_000) }
-  let!(:order) { create(:order, user: user, budget: budgets.first) }
+  let!(:order) { create(:order, user:, budget: budgets.first) }
 
   before do
     request.env["decidim.current_organization"] = organization
@@ -26,8 +26,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
     request.env["decidim.current_component"] = component
     order.projects << projects.first
     order.save!
-    allow(controller).to receive(:budget).and_return(budgets.first)
-    allow(controller).to receive(:current_user).and_return(user)
+    allow(controller).to receive_messages(budget: budgets.first, current_user: user)
   end
 
   describe "#checkout" do
@@ -35,6 +34,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
       before do
         component.update!(settings: { workflow: "all" })
       end
+
       it "sets thanks session and redirects the user" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
         expect(session[:booth_thanks_message]).to be(true)

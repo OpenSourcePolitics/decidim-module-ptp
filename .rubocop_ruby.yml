@@ -1237,6 +1237,8 @@ RSpec/DescribeClass:
     - "**/*/spec/**/*_badge_spec.rb"
     - decidim-core/spec/lib/global_engines_spec.rb
     - "**/tasks/**/*"
+    - decidim-budgets_booth/spec/system/**
+    - decidim-budgets_booth/spec/i18n_spec.rb
 
 RSpec/EmptyExampleGroup:
   Exclude:

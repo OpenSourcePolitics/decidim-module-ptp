@@ -5,17 +5,17 @@ require "spec_helper"
 describe "Explore projects", :slow do
   include_context "with a component"
   let(:manifest_name) { "budgets" }
-  let(:budget) { create(:budget, component: component) }
+  let(:budget) { create(:budget, component:) }
   let(:projects_count) { 5 }
   let!(:projects) do
-    create_list(:project, projects_count, budget: budget)
+    create_list(:project, projects_count, budget:)
   end
   let!(:project) { projects.first }
   let(:categories) { create_list(:category, 3, participatory_space: component.participatory_space) }
 
   describe "show" do
     let(:description) { { en: "Short description", ca: "Descripció curta", es: "Descripción corta" } }
-    let(:project) { create(:project, budget: budget, description: description) }
+    let(:project) { create(:project, budget:, description:) }
 
     before do
       visit_budget
@@ -83,8 +83,8 @@ describe "Explore projects", :slow do
       end
 
       it "updates the current URL with the text filter" do
-        create(:project, budget: budget, title: { en: "Foobar project" })
-        create(:project, budget: budget, title: { en: "Another project" })
+        create(:project, budget:, title: { en: "Foobar project" })
+        create(:project, budget:, title: { en: "Another project" })
         visit_budget
 
         within "aside form.new_filter" do
@@ -102,7 +102,7 @@ describe "Explore projects", :slow do
       end
 
       it "allows filtering by scope" do
-        scope = create(:scope, organization: organization)
+        scope = create(:scope, organization:)
         project.scope = scope
         project.save
 
@@ -139,7 +139,7 @@ describe "Explore projects", :slow do
         let!(:component) do
           create(:budgets_component,
                  :with_voting_finished,
-                 manifest: manifest,
+                 manifest:,
                  participatory_space: participatory_process)
         end
 

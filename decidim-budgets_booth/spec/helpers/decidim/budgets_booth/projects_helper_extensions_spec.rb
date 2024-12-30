@@ -4,18 +4,18 @@ require "spec_helper"
 
 describe Decidim::BudgetsBooth::ProjectsHelperExtensions, type: :helper do
   let(:organization) { create(:organization) }
-  let(:participatory_process) { create(:participatory_process, organization: organization) }
+  let(:participatory_process) { create(:participatory_process, organization:) }
   let!(:step_one) do
     create(:participatory_process_step,
            active: true,
            end_date: Time.zone.now.to_date,
-           participatory_process: participatory_process)
+           participatory_process:)
   end
   let!(:step_two) do
     create(:participatory_process_step,
            active: false,
            end_date: 1.month.from_now.to_date,
-           participatory_process: participatory_process)
+           participatory_process:)
   end
 
   before do

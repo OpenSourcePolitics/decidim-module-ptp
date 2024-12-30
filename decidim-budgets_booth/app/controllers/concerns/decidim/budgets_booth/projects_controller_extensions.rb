@@ -7,7 +7,9 @@ module Decidim
       include VotingSupport
 
       included do
+        # rubocop:disable Rails/LexicallyScopedActionFilter
         before_action :set_view_mode, only: :index
+        # rubocop:enable Rails/LexicallyScopedActionFilter
         layout :determine_layout
 
         def index

@@ -61,7 +61,7 @@ describe "Explore Budgets", :slow do
     end
 
     describe "budget list item" do
-      let!(:component){ create(:budgets_component, :with_vote_threshold_percent, manifest:, participatory_space: participatory_process, settings: { landing_page_content: description }) }
+      let!(:component) { create(:budgets_component, :with_vote_threshold_percent, manifest:, participatory_space: participatory_process, settings: { landing_page_content: description }) }
       let(:description) { { en: "Short description", ca: "Descripció curta", es: "Descripción corta" } }
       let(:budget) { budgets.first }
       let(:item) { page.find("#budgets .card--list__item", match: :first) }

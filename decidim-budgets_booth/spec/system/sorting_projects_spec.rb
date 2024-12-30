@@ -18,8 +18,8 @@ describe "Sorting projects" do
   end
 
   let(:budget) { create(:budget, component:) }
-  let!(:project1) { create(:project, budget:, budget_amount: 25_000_000) }
-  let!(:project2) { create(:project, budget:, budget_amount: 50_000_000) }
+  let!(:project_one) { create(:project, budget:, budget_amount: 25_000_000) }
+  let!(:project_two) { create(:project, budget:, budget_amount: 50_000_000) }
 
   before do
     login_as user, scope: :user
@@ -49,15 +49,15 @@ describe "Sorting projects" do
 
   context "when ordering by highest cost" do
     it_behaves_like "ordering projects by selected option", "Highest cost" do
-      let(:first_project) { project2 }
-      let(:last_project) { project1 }
+      let(:first_project) { project_two }
+      let(:last_project) { project_one }
     end
   end
 
   context "when ordering by lowest cost" do
     it_behaves_like "ordering projects by selected option", "Lowest cost" do
-      let(:first_project) { project1 }
-      let(:last_project) { project2 }
+      let(:first_project) { project_one }
+      let(:last_project) { project_two }
     end
   end
 
@@ -70,13 +70,13 @@ describe "Sorting projects" do
         participatory_space: participatory_process
       )
     end
-    let!(:project1) { create(:project, :selected, budget:, budget_amount: 25_000_000) }
-    let!(:project2) { create(:project, :selected, budget:, budget_amount: 77_000_000) }
+    let!(:project_one) { create(:project, :selected, budget:, budget_amount: 25_000_000) }
+    let!(:project_two) { create(:project, :selected, budget:, budget_amount: 77_000_000) }
 
     context "when ordering by most votes" do
       before do
         order = build(:order, budget:)
-        create(:line_item, order:, project: project2)
+        create(:line_item, order:, project: project_two)
         order = Decidim::Budgets::Order.last
         order.checked_out_at = Time.zone.now
         order.save
@@ -89,8 +89,8 @@ describe "Sorting projects" do
           expect(page).to have_css("a.underline.font-bold", text: "Most voted")
         end
 
-        expect(page).to have_css("#projects .card__grid-grid .card__grid:first-child h3", text: translated(project2.title))
-        expect(page).to have_css("#projects .card__grid-grid .card__grid:last-child h3", text: translated(project1.title))
+        expect(page).to have_css("#projects .card__grid-grid .card__grid:first-child h3", text: translated(project_two.title))
+        expect(page).to have_css("#projects .card__grid-grid .card__grid:last-child h3", text: translated(project_one.title))
       end
 
       it "automatically sorts by votes and respect the pagination" do
@@ -102,18 +102,18 @@ describe "Sorting projects" do
           expect(page).to have_css("a.underline.font-bold", text: "Most voted")
         end
 
-        # project2 on first page
-        expect(page).to have_content(translated(project2.title))
-        expect(page).to have_no_content(translated(project1.title))
+        # project_two on first page
+        expect(page).to have_content(translated(project_two.title))
+        expect(page).to have_no_content(translated(project_one.title))
 
         within "#projects [data-pagination]" do
           expect(page).to have_content("2")
           page.find("a", text: "2").click
         end
 
-        # project1 on second page
-        expect(page).to have_no_content(translated(project2.title))
-        expect(page).to have_content(translated(project1.title))
+        # project_one on second page
+        expect(page).to have_no_content(translated(project_two.title))
+        expect(page).to have_content(translated(project_one.title))
       end
     end
   end
