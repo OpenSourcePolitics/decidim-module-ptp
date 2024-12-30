@@ -43,6 +43,7 @@ runs:
       run: |
         bundle exec i18n-tasks health
         bundle exec i18n-tasks missing
+      working-directory: ./spec/decidim_dummy_app/
       shell: "bash"
     - run: bundle exec rspec
       name: RSpec
