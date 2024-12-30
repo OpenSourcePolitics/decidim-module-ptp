@@ -1,8 +1,4 @@
 ---
-data:
-  read:
-    - config/locales/*.yml
-    - app/**/*
 
 base_locale: en
 locales: [en, fr]
