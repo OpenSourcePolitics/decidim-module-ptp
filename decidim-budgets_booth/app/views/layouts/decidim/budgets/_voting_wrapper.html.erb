@@ -10,7 +10,7 @@ if respond_to?(:current_component) && current_component && can_be_managed?(curre
 end
 %>
 
-<div id="content" data-content>
+<div id="content" class="projects-content-index" data-content>
   <%= display_flash_messages %>
   <%= yield %>
 </div>

@@ -1,5 +1,10 @@
 /* css for decidim_budgets_booth */
-
+.layout-container .projects-content-index {
+  min-height: calc(100vh - 3.5rem);
+}
+.projects-content-index .layout-2col__main {
+  min-height: calc(100vh - 3.5rem);
+}
 .budget__card__grid-project {
   display: flex;
   flex-direction: row;
@@ -17,6 +22,9 @@
   display:flex;
   flex-direction: column;
   place-items: center;
+}
+.card__list-metadata .text-success {
+  color: #07790d;
 }
 .budget__card__grid-project__amount {
   margin-bottom: 0.5rem;
@@ -61,11 +69,11 @@
   display:flex;
   flex-direction:column;
 }
-
 #menu-bar-custom {
   justify-content: flex-start;
   padding-left: 2rem;
   color: white;
+  height: 3.5rem;
 }
 .menu-bar__exit-link {
   display:flex;
