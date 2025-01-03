@@ -1,0 +1,5 @@
+<div class="<%= projects_container_class(@view_mode) %>">
+  <% projects.each do |project| %>
+    <%= render partial: "project", locals: { project:, card_size: card_size_for_view_mode(@view_mode) } %>
+  <% end %>
+</div>

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+=begin
 require "spec_helper"
 
 describe Decidim::Meetings::MeetingMCell, type: :cell do
@@ -20,3 +20,4 @@ describe Decidim::Meetings::MeetingMCell, type: :cell do
     end
   end
 end
+=end

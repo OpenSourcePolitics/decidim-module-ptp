@@ -1,0 +1,17 @@
+<% if current_order_checked_out? %>
+  <%= t("title", scope: "decidim.budgets.projects.budget_summary.checked_out") %>
+  <div class="budget-summary__content__header">
+            <span class="budget-summary__content__header--title">
+              <%= t("name", scope: "decidim.components.budgets") %>
+            </span>
+    /
+    <%= translated_attribute(budget.title) %>
+    <p class="budget-summary__content__header--description">
+      <%= t("description", scope: "decidim.budgets.projects.budget_summary.checked_out") %>
+    </p>
+  </div>
+<% else %>
+  <p class="budget-summary__progressbox--checked_out">
+    <%= current_rule_description %>
+  </p>
+<% end %>

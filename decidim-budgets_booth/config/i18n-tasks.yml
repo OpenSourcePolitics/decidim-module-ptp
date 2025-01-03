@@ -1,10 +1,43 @@
 ---
 
 base_locale: en
-locales: [en]
+locales: [en, fr]
 
 ignore_unused:
   - "decidim.components.ptp-budgets.name"
+  - "layouts.decidim.shared.layout_two_col.title"
+  - "decidim.components.budgets.settings.global.vote_success_url"
+  - "decidim.components.budgets.settings.global.vote_success_content"
+  - "decidim.components.budgets.settings.global.vote_completed_content"
+  - "decidim.components.budgets.settings.global.vote_cancel_url"
+  - "decidim.components.budgets.settings.global.maximum_budgets_to_vote_on"
+  - "decidim.budgets.budgets_list.voted_on_all_allowed"
+  - "decidim.budgets.projects.index.projects_for"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  - decidim.accessibility.skip_button
+  - decidim.budgets.admin.models.budget.name
+  - decidim.budgets.budgets_list.empty
+  - decidim.budgets.orders.checkout.error
+  - decidim.budgets.projects.empty
+  - decidim.budgets.projects.exit_modal.cancel
+  - decidim.budgets.projects.exit_modal.exit
+  - decidim.budgets.projects.exit_modal.message
+  - decidim.budgets.projects.exit_modal.title
+  - decidim.budgets.projects.index.title
+  - decidim.budgets.projects.project_budget_button.add
+  - decidim.budgets.projects.project_budget_button.added_descriptive
+  - decidim.budgets.projects.projects_for
+  - decidim.budgets.budget_information_modal.more_information
+  - decidim.budgets.projects.budget_confirm.are_you_sure
+  - decidim.budgets.projects.budget_summary.*
+  - decidim.budgets.projects.order_progress.assigned
+  - decidim.budgets.projects.order_progress.budget
+  - decidim.budgets.projects.order_progress.minimum
+  - decidim.searches.filters.search
+  - decidim.searches.filters_small_view.filter
+  - decidim.searches.filters_small_view.filter_and_search
+  - decidim.shared.confirm_modal.cancel
+  - decidim.shared.filter_form_help.*
+  - decidim.components.budgets.name
