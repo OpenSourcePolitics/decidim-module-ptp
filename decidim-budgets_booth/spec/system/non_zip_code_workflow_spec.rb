@@ -161,14 +161,37 @@ describe "Non zip code workflow", type: :system do
             sign_in user
           end
 
-          it "shows how to vote message by default" do
-            visit decidim_budgets.budget_voting_index_path(budget)
-            click_button("Add to your vote", match: :first)
-            expect(page).to have_css("div#voting-help")
-            within "div#voting-help" do
-              expect(page).to have_content("Your vote has not been cast.")
-              expect(page).to have_css("svg", count: 3)
-              expect(page).to have_content("I understand how to vote")
+          describe "vote message popup" do
+            context "when default" do
+              it "shows how to vote message by default" do
+                visit decidim_budgets.budget_voting_index_path(budget)
+                click_button("Add to your vote", match: :first)
+                expect(page).to have_css("div#voting-help")
+                within "div#voting-help" do
+                  expect(page).to have_content("Your vote has not been cast.")
+                  expect(page).to have_css("svg", count: 3)
+                  expect(page).to have_content("I understand how to vote")
+                end
+              end
+            end
+
+            context "when minimun budget to vote is set" do
+              before do
+                component[:settings]["global"]["vote_selected_projects_minimum"] = 2
+              end
+
+              it "shows how to vote when number of projects added matches the minimun budget" do
+                visit decidim_budgets.budget_voting_index_path(budget)
+                click_button("Add to your vote", match: :first)
+                expect(page).not_to have_css("div#voting-help")
+                click_button("Add to your vote")
+                expect(page).not_to have_css("div#voting-help")
+                within "div#voting-help" do
+                  expect(page).to have_content("Your vote has not been cast.")
+                  expect(page).to have_css("svg", count: 3)
+                  expect(page).to have_content("I understand how to vote")
+                end
+              end
             end
           end
 
