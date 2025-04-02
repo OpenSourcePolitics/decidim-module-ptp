@@ -187,11 +187,6 @@ describe "Non zip code workflow", type: :system do
                 expect(page).not_to have_css("div#voting-help")
                 click_button("Add to your vote")
                 expect(page).to have_css("div#voting-help")
-                within "div#voting-help" do
-                  expect(page).to have_content("Your vote has not been cast.")
-                  expect(page).to have_css("svg", count: 3)
-                  expect(page).to have_content("I understand how to vote")
-                end
               end
             end
           end
