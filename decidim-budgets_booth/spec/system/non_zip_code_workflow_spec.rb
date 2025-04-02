@@ -111,8 +111,8 @@ describe "Non zip code workflow", type: :system do
           end
           within ".reveal-overlay" do
             click_button "Remove from vote"
-            expect(page).to have_button("Add to your vote", count: 1)
           end
+          expect(page).to have_button("Add to your vote", count: 2)
         end
 
         context "when full-text is enabled" do
@@ -178,6 +178,7 @@ describe "Non zip code workflow", type: :system do
             context "when minimun budget to vote is set" do
               before do
                 component[:settings]["global"]["vote_selected_projects_minimum"] = 2
+                component[:settings]["global"]["vote_rule_selected_projects_enabled"] = true
               end
 
               it "shows how to vote when number of projects added matches the minimun budget" do
@@ -185,7 +186,7 @@ describe "Non zip code workflow", type: :system do
                 click_button("Add to your vote", match: :first)
                 expect(page).not_to have_css("div#voting-help")
                 click_button("Add to your vote")
-                expect(page).not_to have_css("div#voting-help")
+                expect(page).to have_css("div#voting-help")
                 within "div#voting-help" do
                   expect(page).to have_content("Your vote has not been cast.")
                   expect(page).to have_css("svg", count: 3)
