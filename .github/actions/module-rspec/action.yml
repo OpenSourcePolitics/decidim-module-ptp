@@ -14,7 +14,9 @@ runs:
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
-    - run: sudo apt install libu2f-udev imagemagick
+    - run: |
+       sudo apt update
+       sudo apt install libu2f-udev imagemagick
       name: Install libu2f-udev & imagemagick
       shell: "bash"
     - uses: actions/setup-node@v3
