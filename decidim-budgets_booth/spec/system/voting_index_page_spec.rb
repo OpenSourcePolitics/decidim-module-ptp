@@ -159,8 +159,8 @@ describe "Voting index page", type: :system do
       end
       within ".reveal-overlay" do
         click_button "Remove from vote"
-        expect(page).to have_button("Add to your vote", count: 1)
       end
+      expect(page).to have_button("Add to your vote", count: 5)
     end
 
     describe "filtering projects" do
