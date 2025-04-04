@@ -16,7 +16,6 @@ module Decidim
         def set_help_modal
           rule_enabled = current_component[:settings]["global"]["vote_rule_selected_projects_enabled"]
           minimum_vote = current_component[:settings]["global"]["vote_selected_projects_minimum"]
-          order ||= Decidim::Budgets::Order.find_by(user: current_user, budget: budget)
           line_items = order&.line_items
 
           @show_help_modal =
@@ -28,6 +27,10 @@ module Decidim
             else
               order.blank?
             end
+        end
+
+        def order
+          @order ||= Decidim::Budgets::Order.find_by(user: current_user, budget: budget)
         end
       end
     end
