@@ -28,8 +28,12 @@ if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
   $(".project-vote-button", $projectItem).focus();
 }
 
-<% if @show_help_modal %>
-  $("#voting-help").foundation("open");
-<% end %>
+var $dataOpen = $('.off-canvas-wrapper')
+if($dataOpen.data("open-modal") === false){
+  <% if @show_help_modal %>
+   $("#voting-help").foundation("open");
+   $dataOpen.data("open-modal", "true")
+  <% end %>
+}
 
 window.DecidimBudgets.checkProgressPosition();
