@@ -175,18 +175,37 @@ describe "Non zip code workflow", type: :system do
               end
             end
 
-            context "when minimun budget to vote is set" do
+            context "when min && max number of projects to vote on rule is set && minimum projects to vote is 1" do
               before do
-                component[:settings]["global"]["vote_selected_projects_minimum"] = 2
                 component[:settings]["global"]["vote_rule_selected_projects_enabled"] = true
+                component[:settings]["global"]["vote_selected_projects_minimum"] = 1
               end
 
-              it "shows how to vote when number of projects added matches the minimun budget" do
+              it "shows how to vote when number of projects added matches 1" do
+                visit decidim_budgets.budget_voting_index_path(budget)
+                click_button("Add to your vote", match: :first)
+                expect(page).to have_css("div#voting-help")
+                within "div#voting-help" do
+                  expect(page).to have_content("I understand how to vote")
+                end
+              end
+            end
+
+            context "when min && max number of projects to vote on rule is set && minimum projects to vote is 2" do
+              before do
+                component[:settings]["global"]["vote_rule_selected_projects_enabled"] = true
+                component[:settings]["global"]["vote_selected_projects_minimum"] = 2
+              end
+
+              it "shows how to vote when number of projects added matches 2" do
                 visit decidim_budgets.budget_voting_index_path(budget)
                 click_button("Add to your vote", match: :first)
                 expect(page).not_to have_css("div#voting-help")
                 click_button("Add to your vote")
                 expect(page).to have_css("div#voting-help")
+                within "div#voting-help" do
+                  expect(page).to have_content("I understand how to vote")
+                end
               end
             end
           end
