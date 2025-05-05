@@ -5,7 +5,8 @@
 <div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns">
     <% if component_settings.geocoding_enabled? %>
-      <%= dynamic_map_for projects_data_for_map(all_geocoded_projects) do %>
+      <% page_geocoded_projects = Decidim::Budgets::Project.where(id: projects.map(&:id)).geocoded %>
+      <%= dynamic_map_for projects_data_for_map(page_geocoded_projects) do %>
         <template id="marker-popup">
           <div class="map-info__content">
             <h3>${title}</h3>
