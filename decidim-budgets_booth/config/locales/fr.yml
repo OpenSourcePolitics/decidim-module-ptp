@@ -65,6 +65,8 @@ fr:
           title: Êtes-vous certain de vouloir annuler votre vote ?
         index:
           back_to_budgets: Retour aux budgets
+        map:
+          view_project: Voir le projet
         order_progress:
           ready: Je suis prêt
           total_budget: 'Budget total: '
