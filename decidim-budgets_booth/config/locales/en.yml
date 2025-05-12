@@ -68,6 +68,8 @@ en:
           title: Are you sure you don't want to cast your vote?
         index:
           back_to_budgets: Back to budgets
+        map:
+          view_project: View project
         order_progress:
           ready: I am ready
           total_budget: 'Total budget: '
