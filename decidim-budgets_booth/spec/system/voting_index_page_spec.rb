@@ -477,7 +477,6 @@ describe "Voting index page", type: :system do
 
   def non_zipcode_vote_budget!
     click_button("Add to your vote", match: :first)
-    click_button "I understand how to vote"
     click_button "I am ready"
     click_button "Confirm"
   end

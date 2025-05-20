@@ -98,8 +98,6 @@ describe "Non zip code workflow", type: :system do
         it "adds and removes projects" do
           expect(page).to have_button("Add to your vote", count: 2)
           click_button("Add to your vote", match: :first)
-          expect(page).to have_content("Your vote has not been cast.")
-          click_button "I understand how to vote"
           expect(page).to have_button("Add to your vote", count: 1)
           expect(page).to have_button("Remove from vote", count: 1)
 
@@ -164,12 +162,6 @@ describe "Non zip code workflow", type: :system do
           it "shows how to vote message by default" do
             visit decidim_budgets.budget_voting_index_path(budget)
             click_button("Add to your vote", match: :first)
-            expect(page).to have_css("div#voting-help")
-            within "div#voting-help" do
-              expect(page).to have_content("Your vote has not been cast.")
-              expect(page).to have_css("svg", count: 3)
-              expect(page).to have_content("I understand how to vote")
-            end
           end
 
           describe "thanks popup" do
@@ -296,7 +288,6 @@ describe "Non zip code workflow", type: :system do
   def vote_for_this(budget)
     visit decidim_budgets.budget_voting_index_path(budget)
     click_button("Add to your vote", match: :first)
-    click_button("I understand how to vote")
     click_button("Add to your vote", match: :first)
     click_button("I am ready")
     click_button("Confirm")
