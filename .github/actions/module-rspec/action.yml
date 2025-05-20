@@ -14,6 +14,11 @@ runs:
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+    - run: |
+        sudo apt update
+        sudo apt install libu2f-udev imagemagick
+      name: Install libu2f-udev & imagemagick
+      shell: "bash"
     - uses: actions/setup-node@v3
       with:
         node-version: 16
@@ -44,7 +49,7 @@ runs:
       working-directory: ${{ inputs.name }}
       shell: "bash"
     - uses: codecov/codecov-action@v3
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: always()
       with:
         name: screenshots

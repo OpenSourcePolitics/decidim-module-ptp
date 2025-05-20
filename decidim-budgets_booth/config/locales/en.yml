@@ -68,6 +68,8 @@ en:
           title: Are you sure you don't want to cast your vote?
         index:
           back_to_budgets: Back to budgets
+        map:
+          view_project: View project
         order_progress:
           ready: I am ready
           total_budget: 'Total budget: '
@@ -145,6 +147,9 @@ en:
           label: Close
           list_description: These are the projects you picked.
           title: Your vote
+        voting_notification_event:
+          notification_casted: Your vote has been casted
+          notification_title: You have successfully cast your vote for the budget %{budget_name}
     components:
       budgets:
         settings:
