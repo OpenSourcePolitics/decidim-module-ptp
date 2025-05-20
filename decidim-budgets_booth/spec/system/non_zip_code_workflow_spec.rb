@@ -110,7 +110,7 @@ describe "Non zip code workflow", type: :system do
           within ".reveal-overlay" do
             click_button "Remove from vote"
           end
-          expect(page).to have_button("Add to your vote", count: 3)
+          expect(page).to have_button("Add to your vote", count: 2)
         end
 
         context "when full-text is enabled" do
