@@ -98,8 +98,6 @@ describe "Non zip code workflow", type: :system do
         it "adds and removes projects" do
           expect(page).to have_button("Add to your vote", count: 2)
           click_button("Add to your vote", match: :first)
-          expect(page).to have_content("Your vote has not been cast.")
-          click_button "I understand how to vote"
           expect(page).to have_button("Add to your vote", count: 1)
           expect(page).to have_button("Remove from vote", count: 1)
 
@@ -159,55 +157,6 @@ describe "Non zip code workflow", type: :system do
 
           before do
             sign_in user
-          end
-
-          describe "vote message popup" do
-            context "when default" do
-              it "shows how to vote message by default" do
-                visit decidim_budgets.budget_voting_index_path(budget)
-                click_button("Add to your vote", match: :first)
-                expect(page).to have_css("div#voting-help")
-                within "div#voting-help" do
-                  expect(page).to have_content("Your vote has not been cast.")
-                  expect(page).to have_css("svg", count: 3)
-                  expect(page).to have_content("I understand how to vote")
-                end
-              end
-            end
-
-            context "when min && max number of projects to vote on rule is set && minimum projects to vote is 1" do
-              before do
-                component[:settings]["global"]["vote_rule_selected_projects_enabled"] = true
-                component[:settings]["global"]["vote_selected_projects_minimum"] = 1
-              end
-
-              it "shows how to vote when number of projects added matches 1" do
-                visit decidim_budgets.budget_voting_index_path(budget)
-                click_button("Add to your vote", match: :first)
-                expect(page).to have_css("div#voting-help")
-                within "div#voting-help" do
-                  expect(page).to have_content("I understand how to vote")
-                end
-              end
-            end
-
-            context "when min && max number of projects to vote on rule is set && minimum projects to vote is 2" do
-              before do
-                component[:settings]["global"]["vote_rule_selected_projects_enabled"] = true
-                component[:settings]["global"]["vote_selected_projects_minimum"] = 2
-              end
-
-              it "shows how to vote when number of projects added matches 2" do
-                visit decidim_budgets.budget_voting_index_path(budget)
-                click_button("Add to your vote", match: :first)
-                expect(page).not_to have_css("div#voting-help")
-                click_button("Add to your vote")
-                expect(page).to have_css("div#voting-help")
-                within "div#voting-help" do
-                  expect(page).to have_content("I understand how to vote")
-                end
-              end
-            end
           end
 
           describe "thanks popup" do
@@ -334,7 +283,6 @@ describe "Non zip code workflow", type: :system do
   def vote_for_this(budget)
     visit decidim_budgets.budget_voting_index_path(budget)
     click_button("Add to your vote", match: :first)
-    click_button("I understand how to vote")
     click_button("Add to your vote", match: :first)
     click_button("I am ready")
     click_button("Confirm")
