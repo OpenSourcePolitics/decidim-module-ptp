@@ -94,7 +94,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
     describe "#checkout" do
       context "and there is one budget" do
         let(:decidim_participatory_processes) { Decidim::EngineRouter.main_proxy(component.participatory_space) }
-        let!(:order) { create(:order, user:, budget: budget) }
+        let!(:order) { create(:order, user:, budget:) }
 
         before do
           request.env["decidim.current_organization"] = organization
@@ -104,7 +104,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
           projects_set.first.update!(budget_amount: 70_000)
           order.projects << projects_set.first
           order.save!
-          allow(controller).to receive_messages(budget: budget, current_user: user)
+          allow(controller).to receive_messages(budget:, current_user: user)
         end
 
         it "sets thanks session and redirects the user to process_path" do
