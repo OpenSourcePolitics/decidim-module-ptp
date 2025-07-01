@@ -64,7 +64,7 @@ fr:
       budgets:
         voting_menubar:
           back_to_projects: Retour aux projets
-          cancel_voting: Abandonner le vote
+          cancel_voting: Sortir de la cabine de vote
         voting_notification:
           notification: Vous êtes dans la cabine de vote.
       shared:
