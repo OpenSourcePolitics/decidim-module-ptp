@@ -38,7 +38,8 @@ runs:
       shell: "bash"
     - run: |
         cd spec/decidim_dummy_app
-        npm install esbuild@0.25.5 --save-dev
+        rm -rf node_modules/esbuild
+        npm install esbuild@0.25.5 --force
       name: Fix esbuild version for dummy app
       shell: "bash"
     - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
