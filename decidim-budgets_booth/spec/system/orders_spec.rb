@@ -378,10 +378,11 @@ describe "Orders" do
           within "#budget-confirm" do
             page.find(".button", text: "Confirm").click
           end
-
-          within "#order-progress .budget-summary__content", match: :first do
-            expect(page).to have_css(".button", text: "delete your vote")
-          end
+          # there is only one budget, so we are redirected to process show page (cf success_redirect_path method)
+          expect(page).to have_css("a", text: translated_attribute(participatory_process.title).to_s)
+          #within "#order-progress .budget-summary__content", match: :first do
+          #  expect(page).to have_css(".button", text: "delete your vote")
+          #end
         end
       end
 
