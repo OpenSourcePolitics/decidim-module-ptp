@@ -2,12 +2,12 @@
 
 .ss-main.country-select{
   .ss-single-selected{
-    padding: $input-padding;
-    font-size: $input-font-size;
-    line-height: $input-line-height;
+    padding: 5px;
+    font-size: 18px;
+    line-height: normal;
     height: 2.4375rem;
-    border: $input-border;
-    box-shadow: $input-shadow;
+    border: 1px solid black;
+    box-shadow: none;
   }
 
   .ss-single-selected,

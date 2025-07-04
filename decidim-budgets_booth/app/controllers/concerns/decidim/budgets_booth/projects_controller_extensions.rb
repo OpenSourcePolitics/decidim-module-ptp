@@ -7,25 +7,34 @@ module Decidim
       include VotingSupport
 
       included do
+        # rubocop:disable Rails/LexicallyScopedActionFilter
+        before_action :set_view_mode, only: :index
+        # rubocop:enable Rails/LexicallyScopedActionFilter
+        layout :determine_layout
+
         def index
           raise ActionController::RoutingError, "Not Found" unless budget
-
-          raise ActionController::RoutingError, "Not Found" unless allow_access?
         end
 
         def show
           raise ActionController::RoutingError, "Not Found" unless budget
           raise ActionController::RoutingError, "Not Found" unless project
-          raise ActionController::RoutingError, "Not Found" unless allow_access?
         end
       end
 
       private
 
-      def allow_access?
-        return false if voting_booth_forced? && voting_enabled? && !voted_this?(budget)
+      def determine_layout
+        "decidim/budgets/voting_layout"
+      end
 
-        true
+      def set_view_mode
+        @view_mode ||= params[:view_mode] || session[:view_mode] || default_view_mode
+        session[:view_mode] = @view_mode
+      end
+
+      def default_view_mode
+        @default_view_mode = "grid"
       end
     end
   end

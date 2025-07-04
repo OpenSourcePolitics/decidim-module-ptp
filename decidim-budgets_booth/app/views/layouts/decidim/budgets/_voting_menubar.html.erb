@@ -1,0 +1,26 @@
+<!-- bg color => root primary -->
+<div id="menu-bar" class="menu-bar__container">
+  <div id="menu-bar-custom" class="menu-bar">
+    <% if current_workflow.single? %>
+      <%#= link_to Decidim::ParticipatoryProcesses::Engine.routes.url_helpers.participatory_process_path(budget.participatory_space), class: 'menu-bar__exit-link' do %>
+      <%= link_to cancel_redirect_path, class: 'menu-bar__exit-link' do %>
+        <%= icon "arrow-left-line" %>
+        <%= t('.cancel_voting') %>
+      <% end %>
+    <% else %>
+      <%= link_to cancel_redirect_path, class: 'menu-bar__exit-link' do %>
+        <%= icon "arrow-left-line" %>
+        <%= t('.cancel_voting') %>
+      <% end %>
+    <% end %>
+    <span class="menu-bar__span">-</span>
+    <% if projects %>
+      <h1 class="menu-bar__title"><%= budget_title %></h1>
+    <% end %>
+    <% if controller.action_name == "show" %>
+      <span class="menu-bar__span">-</span>
+      <%= link_to t('layouts.decidim.budgets.voting_menubar.back_to_projects'), budget_projects_path %>
+    <% end %>
+  </div>
+</div>
+

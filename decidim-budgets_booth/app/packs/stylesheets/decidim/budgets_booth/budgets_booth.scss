@@ -1,193 +1,202 @@
 /* css for decidim_budgets_booth */
-$passive-item-color: #919191;
-$active-item-color: $black;
-
-#voting-help,
-#thanks-message{
-  .reveal__header{
-    border: hidden;
-
-    .subtitle{
-      font-size: 1.2rem;
-    }
-  }
-
-  .voting-help-item{
-    @include breakpoint(medium down){
-      margin: 1rem 0;
-    }
-
-    .circle{
-      &.active{
-        fill: $active-item-color;
-        border: 4px solid $active-item-color;
-
-        svg{
-          fill: $active-item-color;
-        }
-      }
-
-      display: block;
-      position: relative;
-      border: 2px solid $passive-item-color;
-      border-radius: 50%;
-      width: 150px;
-      height: 150px;
-      left: 10px;
-
-      @include breakpoint(medium down){
-        left: 20%;
-      }
-
-      svg{
-        display: block;
-        position: relative;
-        fill: $passive-item-color;
-        top: 23px;
-        left: 22px;
-        width: 100px;
-        height: 100px;
-      }
-    }
-
-    .help-description{
-      margin-top: .5rem;
-      font-size: 1.2rem;
-
-      span{
-        &.strong{
-          font-weight: 800;
-        }
-      }
-
-      &.active{
-        color: $active-item-color;
-      }
-
-      color: $passive-item-color;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  }
-
-  .card{
-    &.card--secondary{
-      .filters__section:first-child{
-        display: none;
-
-        @include breakpoint(medium){
-          display: block;
-        }
-      }
-    }
-  }
+.layout-container .projects-content-index {
+  min-height: calc(100vh - 3.5rem);
 }
-
-.card--list__icon{
-  margin-right: 0;
+.projects-content-index .layout-2col__main {
+  min-height: calc(100vh - 3.5rem);
 }
-
-.budget-summary__progressbox--fixed{
-  padding: .5rem 2rem 1rem;
-
-  @include breakpoint(mediumlarge){
-    padding: 1rem 4rem;
-  }
-}
-
-.spaced-bottom{
-  margin-bottom: .3rem;
-}
-
-.budget-list{
-  &__item{
-    @include breakpoint(medium down){
-      margin-bottom: 2rem;
-      display: block;
-    }
-  }
-
-  &__data{
-    justify-content: center;
-  }
-}
-
-.flex-column{
-  flex-direction: column;
-
-  @include breakpoint(medium down){
-    flex-direction: column;
-  }
-}
-
-.card{
-  &.budget-summary{
-    display: flex;
-    flex-direction: column;
-
-    a{
-      margin: 1rem 0 0;
-    }
-  }
-}
-
-.customized-budget{
-  margin: auto;
-}
-
-.font-customizer{
-  h2,
-  h3{
-    font-size: 1.1rem;
-  }
-}
-
-.voted-budget{
-  filter: grayscale(100%);
-}
-
-.flex-digits{
+.budget__card__grid-project {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
 
-  .flex-digits-input{
-    display: flex;
-    flex: 0 0 auto;
-
-    input{
-      margin: 0 auto;
-      height: 2.5rem;
-      width: 2.5rem;
-      text-align: center;
-
-      @include breakpoint(smallmedium up){
-        height: 3rem;
-        width: 3rem;
-      }
-    }
+@media (min-width: 769px) and (max-width: 1040px) {
+  .budget__card__grid-project {
+    flex-direction: column-reverse;
   }
 }
 
-.zip-code-errors{
-  .form-error{
-    margin-top: $global-margin;
+.card__list > .budget__card__list-project{
+  display:flex;
+  flex-direction: column;
+  place-items: center;
+}
+.card__list-metadata .text-success {
+  color: #07790d;
+}
+.budget__card__grid-project__amount {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(62 76 92 / 1);
+}
+.project__vote-button {
+  padding: 0.75rem;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 600;
+}
+.budget-summary__new-container {
+  position:sticky;
+  bottom:0;
+  z-index: 20;
+}
+#project-item{
+  &.project-show .budget-summary__content {
+    max-width: 100vw;
   }
 }
-
-.booth-zipcode{
-  &.thumbnail{
-    padding-right: 4px !important;
-    padding-left: 4px !important;
-  }
-
-  &.maximum-width{
-    max-width: 430px;
-  }
+.projects-index {
+  display:flex;
+  flex-direction:column;
+  margin-top:2rem;
+  height: 100vh;
+}
+.projects-index__container {
+  width:90%;
+  margin:auto;
+}
+.projects-index__container__header {
+  margin-bottom:3rem;
+}
+.project-show {
+  display:flex;
+  flex-direction:column;
+}
+#menu-bar-custom {
+  justify-content: flex-start;
+  padding-left: 2rem;
+  color: white;
+  height: 3.5rem;
+}
+.menu-bar__exit-link {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.menu-bar__span {
+  margin:0 1%;
+}
+.menu-bar__title {
+  font-weight:bold;
+}
+.custom-filters > .filter-container+.filter-container {
+  margin-top: 0;
+}
+#budget-booth-body > [data-dialog] >* {
+  --tw-translate-x: -50%;
+}
+.budget-progress > .budget-summary__progressbar--meter {
+  background-color: green;
+}
+.menu-bar__exit-link > svg {
+  flex: none;
+  fill: white;
+  display: block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: white;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+//.reveal-overlay {
+//  display: none;
+//  position: absolute;
+//  top: 50%;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//  z-index: 30;
+//  background-color: lightgrey;
+//  height: -moz-fit-content;
+//  height: fit-content;
+//  max-height: 95vh;
+//  width: 90%;
+//}
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1005;
+  display: none;
+  background-color: rgba(26, 24, 29, 0.45);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.reveal {
+  z-index: 1006;
+  backface-visibility: hidden;
+  display: none;
+  padding: 1rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: #fafafa;
+  position: relative;
+  top: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 600px;
+  max-width: 75rem;
+  right: auto;
+  left: auto;
+  margin: 0 auto;
 }
 
-#affirm-checkbox{
-  margin-top: $global-margin;
-  font-weight: bold;
+#thanks-message, #vote-completed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  font-size: 18px;
+
+  button {
+    padding: 10px;
+  }
+  .text-content {
+    margin: 10px 0;
+  }
+}
+.reveal__header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    font-weight: bold;
+  }
+}
+.card__project-placeholder-g{
+  width: 100%;
+  height: 100%;
+}
+.card__grid-img {
+  background-color: #F3F4F6;
+}
+#budget-booth-body .view-layout__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.card-grid-selected {
+  --tw-ring-color: var(--tertiary);
+}
+.budget__list--header {
+  align-items: center;
 }

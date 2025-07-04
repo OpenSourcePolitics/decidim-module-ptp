@@ -1,41 +1,16 @@
-var $projects = $('#projects');
+var $projects = $('#projects .budget-list');
+var $order = $('.budget__list--header [data-collection-sort-controls]');
 var $projectsCount = $('#projects-count');
 var $orderFilterInput = $('.order_filter');
-<% if component_settings.geocoding_enabled? %>
-  var $map = $('#map-container');
-  $map.html(' ');
-  $map.html('<%= j(render partial: "map").strip.html_safe %>');
-  // from map.js
-  var $mapElements = $("[data-decidim-map]");
-  $mapElements.each((_i, el) => {
-    const $map = $(el);
-    let mapId = $map.attr("id");
-    if (!mapId) {
-      mapId = `map-${Math.random().toString(36).substr(2, 9)}`;
-      $map.attr("id", mapId);
-    }
 
-    const mapConfig = $map.data("decidim-map");
-    const ctrl = window.Decidim.createMapController(mapId, mapConfig);
-    const map = ctrl.load();
-    map.setMaxZoom(14);
-    // from default.js
-    const tilesConfig = mapConfig.tileLayer;
-    L.tileLayer(tilesConfig.url, tilesConfig.options).addTo(map);
-    $map.data("map", map);
-    $map.data("map-controller", ctrl);
-
-    $map.trigger("configure.decidim", [map, mapConfig]);
-
-    ctrl.start();
-
-    $map.trigger("ready.decidim", [map, mapConfig]);
-  });
-<% end %>
-$projects.html('<%= j(render partial: "projects").strip.html_safe %>');
+$projects.html('<%= j(render partial: "projects_list").strip.html_safe %>');
+$order.html('<%= j(render partial: "order").strip.html_safe %>');
 $projectsCount.html('<%= j(render partial: "count").strip.html_safe %>');
 $orderFilterInput.val('<%= order %>');
 
-var $dropdownMenu = $('.dropdown.menu', $projects);
-$dropdownMenu.foundation();
-$projects.foundation();
+document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: $projects[0] }));
+
+
+
+
+

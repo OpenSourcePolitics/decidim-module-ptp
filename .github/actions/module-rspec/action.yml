@@ -21,7 +21,7 @@ runs:
       shell: "bash"
     - uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18.17.1
     - name: Get npm cache directory path
       id: npm-cache-dir-path
       run: echo "dir=$(npm get cache)-${{ inputs.name }}" >> $GITHUB_OUTPUT

@@ -10,15 +10,7 @@ if respond_to?(:current_component) && current_component && can_be_managed?(curre
 end
 %>
 
-<div class="off-canvas-wrapper" data-open-modal="false">
-  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-    <div class="off-canvas-content" data-off-canvas-content>
-      <div class="footer-separator">
-        <main id="content">
-          <%= display_flash_messages %>
-          <%= yield %>
-        </main>
-      </div>
-    </div>
-  </div>
+<div id="content" class="projects-content-index" data-content>
+  <%= display_flash_messages %>
+  <%= yield %>
 </div>
