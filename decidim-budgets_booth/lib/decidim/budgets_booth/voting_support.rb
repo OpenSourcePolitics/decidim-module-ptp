@@ -36,7 +36,7 @@ module Decidim
       # This configuration option can be set in component settings, the default url when the user has voted on all budgets
       # is budgets path
       def success_redirect_path
-        if budgets.count == 1
+        if budgets.count == 1 && component_settings.try(:vote_success_url).blank?
           decidim_participatory_processes.participatory_process_path(current_component.participatory_space)
         else
           component_settings.try(:vote_success_url).presence || decidim_budgets.budgets_path
