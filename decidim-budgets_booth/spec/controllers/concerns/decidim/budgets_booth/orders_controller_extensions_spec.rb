@@ -107,16 +107,27 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
           allow(controller).to receive_messages(budget:, current_user: user)
         end
 
-        it "sets thanks session and redirects the user to process_path" do
-          post :checkout, params: { budget_id: budget.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
-          expect(session[:booth_vote_completed]).to be(true)
-          expect(response).to redirect_to(decidim_participatory_processes.participatory_process_path(component.participatory_space))
-        end
-
         it "enqueues job" do
           expect do
             post :checkout, params: { budget_id: budget.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
           end.to have_enqueued_job(Decidim::EventPublisherJob)
+        end
+
+        context "and vote_success_url is not defined" do
+          it "sets thanks session and redirects the user to process_path" do
+            post :checkout, params: { budget_id: budget.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
+            expect(session[:booth_vote_completed]).to be(true)
+            expect(response).to redirect_to(decidim_participatory_processes.participatory_process_path(component.participatory_space))
+          end
+        end
+
+        context "and vote_success_url is defined" do
+          it "sets thanks session and redirects the user to vote_success_url" do
+            component.update!(settings: { vote_success_url: "/processes" })
+            post :checkout, params: { budget_id: budget.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
+            expect(session[:booth_vote_completed]).to be(true)
+            expect(response).to redirect_to(decidim_participatory_processes.participatory_processes_path)
+          end
         end
       end
     end
