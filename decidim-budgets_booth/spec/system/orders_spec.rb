@@ -706,7 +706,7 @@ describe "Orders" do
       it "renders selected projects" do
         visit_budget
 
-        expect(page).to have_css(".card__list-metadata", count: 2)
+        expect(page).to have_css(".card__grid-metadata", count: 2)
       end
 
       it "does not show a filter to select added projects" do
