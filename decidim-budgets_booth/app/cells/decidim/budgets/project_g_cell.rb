@@ -56,7 +56,7 @@ module Decidim
       end
 
       def classes
-        super.merge(metadata: "card__list-metadata")
+        super.merge(metadata: "card__grid-metadata")
       end
 
       def resource_id = "project-#{project.id}-item"
