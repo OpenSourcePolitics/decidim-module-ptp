@@ -1,20 +1,22 @@
-<%= action_authorized_button_to(
+<% unless voting_finished? %>
+  <% button_type = resource_added? ? "button__transparent-secondary" : "button__secondary" %>
+  <%= action_authorized_button_to(
   "vote",
-  budget_order_line_item_path(model.budget, project_id: model),
+  budget_order_line_item_path(model.budget, project_id: model, show_only_added: options[:show_only_added], view_mode: options[:view_mode]),
   method: vote_button_method,
   remote: true,
-  class: "button #{scale_up} #{selected_budget} customized-budget display-block project-vote-button",
+  class: "button #{scale_up} budget-list__action project__vote-button #{button_type} customized-budget display-block project-#{project.id}-vote-button ",
   data: {
     add: !resource_added?,
     disable: true,
     budget: model.budget_amount,
     project_id: model.id,
     allocation: resource_allocation,
-    "redirect-url": budget_voting_index_path
+    "redirect-url": resource_path
   },
   disabled: vote_button_disabled?,
   title: vote_button_label
- ) do %>
+  ) do %>
   <%= resource_added? ? t("remove_from_vote", scope: "decidim.budgets.project_vote_button") :t("add_to_vote", scope: "decidim.budgets.project_vote_button") %>
+  <% end %>
 <% end %>
-
