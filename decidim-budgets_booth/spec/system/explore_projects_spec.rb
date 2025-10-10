@@ -178,6 +178,31 @@ describe "Explore projects", :slow do
       end
     end
 
+    context "when votes are disabled" do
+      let!(:component) do
+        create(:budgets_component,
+               :with_votes_disabled,
+               manifest:,
+               participatory_space: participatory_process)
+      end
+
+      it "does not show the vote button in projects cards" do
+        visit_budget
+
+        within "#projects" do
+          expect(page).not_to have_css(".project__vote-button")
+        end
+      end
+
+      it "gives information on disabled votes" do
+        visit_budget
+
+        within ".layout-2col__aside" do
+          expect(page).to have_text("Vote disabled.")
+        end
+      end
+    end
+
     context "when directly accessing from URL with an invalid budget id" do
       it_behaves_like "a 404 page" do
         let(:target_path) { decidim_budgets.budget_projects_path(99_999_999) }
