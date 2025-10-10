@@ -1,4 +1,4 @@
-<% unless voting_finished? %>
+<% unless voting_finished? || current_settings.votes == "disabled" %>
   <% button_type = resource_added? ? "button__transparent-secondary" : "button__secondary" %>
   <%= action_authorized_button_to(
   "vote",

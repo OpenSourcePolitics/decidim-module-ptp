@@ -23,6 +23,8 @@ fr:
           ready: Je suis prêt
           total_budget: 'Budget total: '
           vote: Voter
+        order_progress_text:
+          vote_disabled: Vote désactivé.
         order_selected_projects:
           remove: Supprimer
           selected_projects:

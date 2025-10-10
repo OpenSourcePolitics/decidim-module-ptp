@@ -23,6 +23,8 @@ en:
           ready: I am ready
           total_budget: 'Total budget: '
           vote: Vote
+        order_progress_text:
+          vote_disabled: Vote disabled.
         order_selected_projects:
           remove: Remove
           selected_projects:

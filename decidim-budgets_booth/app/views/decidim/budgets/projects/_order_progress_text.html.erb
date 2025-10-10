@@ -12,6 +12,10 @@
   </div>
 <% else %>
   <p class="budget-summary__progressbox--checked_out">
-    <%= current_rule_description %>
+    <% if current_settings.votes == "disabled" %>
+      <strong><%= t('.vote_disabled') %></strong>
+    <% else %>
+      <%= current_rule_description %>
+    <% end %>
   </p>
 <% end %>
