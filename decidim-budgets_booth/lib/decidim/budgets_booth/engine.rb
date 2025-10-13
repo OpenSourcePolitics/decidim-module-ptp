@@ -31,6 +31,10 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::BudgetsBooth::Engine.root}/app/views") # for partials
       end
 
+      initializer "decidim_budgets_booth.register_icon" do
+        Decidim.icons.register(name: "envelope-closed", icon: "envelope-closed", category: "system", description: "", engine: :core)
+      end
+
       initializer "decidim_budgets_booth.add_customizations", after: "decidim.action_controller" do
         config.to_prepare do
           # Helper extensions
