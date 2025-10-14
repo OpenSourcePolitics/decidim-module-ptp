@@ -375,7 +375,7 @@ describe "Orders" do
 
           expect(page).to have_css("#budget-confirm", visible: :visible)
 
-          within "#budget-confirm" do
+          within "#budget-confirm-content" do
             page.find(".button", text: "Confirm").click
           end
           # there is only one budget, so we are redirected to process show page (cf success_redirect_path method)
@@ -428,10 +428,13 @@ describe "Orders" do
 
             before do
               find("[data-dialog-open='budget-confirm']", match: :first).click
-              click_on "Confirm"
+              within "#budget-confirm-content" do
+                page.find(".button", text: "Confirm").click
+              end
             end
 
             it "shows private-only activity log entry" do
+              sleep 1
               page.visit decidim.profile_activity_path(nickname: user.nickname)
               expect(page).to have_content("New budgeting vote at #{translated(budget.title)}")
               expect(page).to have_link(translated(budget.title), href: router.budget_path(budget))
