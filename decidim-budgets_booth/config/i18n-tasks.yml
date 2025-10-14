@@ -13,6 +13,7 @@ ignore_unused:
   - "decidim.components.budgets.settings.global.maximum_budgets_to_vote_on"
   - "decidim.budgets.budgets_list.voted_on_all_allowed"
   - "decidim.budgets.projects.index.projects_for"
+  - "decidim.budgets.voting.index.sign_in_first"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
