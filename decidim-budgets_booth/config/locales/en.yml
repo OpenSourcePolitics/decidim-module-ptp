@@ -34,6 +34,8 @@ en:
         show:
           budget: Budget
       voting:
+        index:
+          sign_in_first: You must connect before continue
         thanks_message_modal:
           continue: Continue
           default_text: Thank you for your participation

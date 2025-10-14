@@ -34,6 +34,8 @@ fr:
         show:
           budget: Budget
       voting:
+        index:
+          sign_in_first: Vous devez vous connecter avant de continuer
         thanks_message_modal:
           continue: Continuer
           default_text: Merci pour votre participation
