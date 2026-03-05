@@ -16,16 +16,8 @@ module Decidim
         # "sms" authentication.
         Decidim::Budgets::Engine.routes.prepend do
           resources :budgets do
-            resources :voting, only: [:index]
-
-            namespace :voting do
-              resources :projects, only: [:show]
-            end
+            resources :projects, only: [:show, :index]
             resource :order, only: [:show]
-
-            collection do
-              resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
-            end
           end
         end
       end
@@ -39,6 +31,10 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::BudgetsBooth::Engine.root}/app/views") # for partials
       end
 
+      initializer "decidim_budgets_booth.register_icon" do
+        Decidim.icons.register(name: "envelope-closed", icon: "envelope-closed", category: "system", description: "", engine: :core)
+      end
+
       initializer "decidim_budgets_booth.add_customizations", after: "decidim.action_controller" do
         config.to_prepare do
           # Helper extensions
@@ -47,24 +43,10 @@ module Decidim
           )
 
           # Cells extensions
-          Decidim::Budgets::ProjectVotedHintCell.include(
-            Decidim::BudgetsBooth::ProjectVotedHintCellExtensions
-          )
           Decidim::Budgets::ProjectVoteButtonCell.include(
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
 
-          Decidim::Budgets::ProjectListItemCell.include(
-            Decidim::BudgetsBooth::ProjectListItemExtensions
-          )
-
-          Decidim::Budgets::BudgetListItemCell.include(
-            Decidim::BudgetsBooth::BudgetListItemCellExtensions
-          )
-
-          Decidim::Budgets::BudgetsHeaderCell.include(
-            Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
-          )
           Decidim::Budgets::BudgetsListCell.include(
             Decidim::BudgetsBooth::VotingSupport
           )
@@ -91,38 +73,6 @@ module Decidim
           Decidim::Budgets::ProjectsController.include(
             Decidim::BudgetsBooth::ProjectsControllerExtensions
           )
-
-          Decidim::Budgets::LineItemsController.include(
-            Decidim::BudgetsBooth::LineItemsControllerExtensions
-          )
-
-          # Commands extensions
-          Decidim::Budgets::Admin::CreateBudget.include(
-            Decidim::BudgetsBooth::CreateBudgetExtensions
-          )
-
-          Decidim::Budgets::Admin::UpdateBudget.include(
-            Decidim::BudgetsBooth::UpdateBudgetExtensions
-          )
-
-          # Models extensions
-          Decidim::Budgets::Budget.include(
-            Decidim::BudgetsBooth::BudgetExtensions
-          )
-          Decidim::User.include(
-            Decidim::BudgetsBooth::UserExtensions
-          )
-          Decidim::Component.include(
-            Decidim::BudgetsBooth::ComponentExtensions
-          )
-          Decidim::Scope.include(
-            Decidim::BudgetsBooth::ScopeExtensions
-          )
-
-          # Forms extensions
-          Decidim::Budgets::Admin::BudgetForm.include(
-            Decidim::BudgetsBooth::BudgetFormExtensions
-          )
         end
       end
 
@@ -133,15 +83,9 @@ module Decidim
           settings.attribute :maximum_budgets_to_vote_on, type: :integer, default: 0
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
-          settings.attribute :voting_terms, type: :text, translated: true, editor: true
           settings.attribute :vote_success_url, type: :string
           settings.attribute :vote_cancel_url, type: :string
-          settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
-      end
-
-      initializer "decidim_budgets.add_zip_code_workflow" do
-        Decidim::Budgets.workflows[:zip_code] = Decidim::BudgetsBooth::Workflows::ZipCode
       end
     end
   end

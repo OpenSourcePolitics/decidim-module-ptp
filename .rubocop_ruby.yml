@@ -260,7 +260,7 @@ Style/BlockDelimiters:
     - let!
     - subject
     - watch
-  IgnoredMethods:
+  AllowedMethods:
     # Methods that can be either procedural or functional and cannot be
     # categorised from their usage alone, e.g.
     #
@@ -981,7 +981,7 @@ Style/SymbolArray:
 Style/SymbolProc:
   # A list of method names to be ignored by the check.
   # The names should be fairly unique, otherwise you'll end up ignoring lots of code.
-  IgnoredMethods:
+  AllowedMethods:
     - respond_to
     - define_method
 
@@ -1237,6 +1237,8 @@ RSpec/DescribeClass:
     - "**/*/spec/**/*_badge_spec.rb"
     - decidim-core/spec/lib/global_engines_spec.rb
     - "**/tasks/**/*"
+    - decidim-budgets_booth/spec/system/**
+    - decidim-budgets_booth/spec/i18n_spec.rb
 
 RSpec/EmptyExampleGroup:
   Exclude:

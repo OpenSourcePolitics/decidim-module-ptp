@@ -1,0 +1,28 @@
+<% project_card = resource_added? ? "card__grid card-grid-selected" : classes[:default] %>
+<%= link_to resource_path, class: project_card, id: resource_id do %>
+  <div class="<%= classes[:img] %>">
+    <% if has_image? %>
+      <%= image_tag resource_image_path, alt: alt_title %>
+    <% end %>
+  </div>
+  <div class="<%= classes[:text] %>">
+    <div class="card__grid-text-title">
+      <%= content_tag title_tag, title, class: title_class %>
+    </div>
+
+    <%= description.truncate_words(20) %>
+
+    <% if metadata_cell.present? %>
+      <div class="<%= classes[:metadata] %>">
+        <%= cell metadata_cell, resource, links: false, skip_state: true, **options %>
+        <%= cell("decidim/budgets/project_voted_hint", project, class: "margin-left-1") if current_order_checked_out? && resource_added? %>
+      </div>
+    <% end %>
+    <div class="budget__card__grid-project">
+      <%= cell("decidim/budgets/project_vote_button", project, show_only_added:, view_mode:) %>
+      <span class="budget__card__grid-project__amount">
+      <%= budget_to_currency(project.budget_amount) %>
+      </span>
+    </div>
+  </div>
+<% end %>
